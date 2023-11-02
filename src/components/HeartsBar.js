@@ -1,49 +1,60 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/system';
-import { Typography, Paper, Grid } from '@mui/material';
+import { Typography, Paper, Grid, Container } from '@mui/material';
 import Heart from './Heart';
 
 const HeartsBar = ({
     text,
     number,
-    color
+    color,
+    onClick
 }) => {
-  const [clicked, setClicked] = useState(false);
+    const hearts = [];
+    const [clickableIndex, setClickableIndex] = useState(1);
 
-  const handleButtonClick = () => {
-    setClicked(true);
-  };
+    const handleHeartClick = (clickedIndex) => {
+        if (clickedIndex === clickableIndex) {
+            setClickableIndex(clickableIndex + 1);
+            onClick();
+        }
+    };
 
-  return (
-    <>
-    <Typography style={{ 
-        fontSize: '22px',
-        fontStyle: 'bold',
-        fontFamily: 'cursive',
-        }}>
-            {text}
-    </Typography>
-    <Paper elevation={3} style={{ 
-        padding: '10px',
-        border: `5px solid ${color}`,
-        borderRadius: '20px',
-        backgroundColor: `${color}66`,
-        }}>
-        
-        <Grid container spacing={0} justifyContent="center">
-            <Grid item xs={4}>
-                <Heart number='1' color={color}></Heart>
-            </Grid>
-            <Grid item xs={4}>
-                <Heart number='2' color={color}></Heart>
-            </Grid>
-            <Grid item xs={4}>
-                <Heart number='3' color={color}></Heart>
-            </Grid>
+    for (let i = 1; i <= number; i++) {
+        hearts.push(
+        <Grid item xs={4} key={i}>
+            <Heart 
+                number={i} 
+                color={color}
+                clickable={i <= clickableIndex}
+                onClick={() => handleHeartClick(i)}
+            />
         </Grid>
-    </Paper>
-    </>
-  );
+        );
+    }
+
+    return (
+        <>
+            <Container>
+                <Typography style={{ 
+                    fontSize: '22px',
+                    fontFamily: 'cursive',
+                    }}>
+                        {text}
+                </Typography>
+                <Paper elevation={3} style={{ 
+                    padding: '10px',
+                    border: `5px solid ${color}`,
+                    borderRadius: '20px',
+                    backgroundColor: `${color}66`,
+                    }}>
+                    
+                    <Grid container spacing={0} justifyContent="center">
+                        {hearts}
+                    </Grid>
+                </Paper>
+            </Container>
+        </>
+    );
 };
 
 export default HeartsBar;

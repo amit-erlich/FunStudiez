@@ -8,7 +8,6 @@ const CustomButton = styled(IconButton)(({ theme, borderColor, bgColor }) => ({
   width: '90px',
   height: '90px',
   fontSize: '22px',
-  fontStyle: 'bold',
   color: 'black',
   overflow: 'hidden',
   fontWeight: 'bold',
@@ -27,13 +26,18 @@ const CustomButton = styled(IconButton)(({ theme, borderColor, bgColor }) => ({
 }));
 
 const Heart = ({
-    number,
-    color
+  number,
+  color,
+  clickable,
+  onClick
 }) => {
   const [clicked, setClicked] = useState(false);
 
   const handleButtonClick = () => {
-    setClicked(true);
+    if (clickable) {
+      setClicked(true);
+      onClick();
+    }
   };
 
   const borderColor = color;
