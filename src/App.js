@@ -22,6 +22,8 @@ function App() {
         <Square text='Solve task no.5' number='3' color='#16d7ad'></Square>
         <Square text='10 min break' number='2' color='#d71670' addStar={true}></Square>
         <Square text='5 min break' number='3' color='#16d7ad' addStar={true}></Square>
+        <Heart text='15 min break' number='1' color='#d71670'></Heart>
+        <Heart text='15 min break' number='2' color='#d71670'></Heart>
         <Heart text='15 min break' number='3' color='#d71670'></Heart>
       </header>
     </div>

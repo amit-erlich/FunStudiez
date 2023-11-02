@@ -5,8 +5,8 @@ import HeartIcon from '@mui/icons-material/FavoriteRounded';
 import BrokenHeartIcon from '@mui/icons-material/HeartBrokenRounded';
 
 const CustomButton = styled(IconButton)(({ theme, borderColor, bgColor }) => ({
-  width: '140px',
-  height: '140px',
+  width: '105px',
+  height: '105px',
   fontSize: '22px',
   fontStyle: 'bold',
   color: 'black',
@@ -49,12 +49,12 @@ const Heart = ({
       bgColor={bgColor}
       onClick={handleButtonClick}
     >
-        {!clicked && <HeartIcon style={{ color: borderColor, fontSize: '120px' }} />}
-        {clicked && <BrokenHeartIcon style={{ color: bgColor, fontSize: '120px' }} />}
+        {!clicked && <HeartIcon style={{ color: borderColor, fontSize: '85px' }} />}
+        {clicked && <BrokenHeartIcon style={{ color: bgColor, fontSize: '85px' }} />}
         <Typography
             style={{
                 position: 'absolute',
-                top: '39%',
+                top: '35%',
                 color: 'black',
                 fontWeight: 'bold',
                 fontSize: '22px',
