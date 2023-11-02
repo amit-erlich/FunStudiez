@@ -1,7 +1,7 @@
 import './App.css';
 import Square from './components/TaskSquare';
-import Button from '@mui/material/Button';
-import Heart from './components/Heart';
+import { Button, Paper, Grid } from '@mui/material';
+import HeartsBar from './components/HeartsBar';
 
 const handleClick = () => {
   alert('clicked! Lets start')
@@ -22,9 +22,8 @@ function App() {
         <Square text='Solve task no.5' number='3' color='#16d7ad'></Square>
         <Square text='10 min break' number='2' color='#d71670' addStar={true}></Square>
         <Square text='5 min break' number='3' color='#16d7ad' addStar={true}></Square>
-        <Heart text='15 min break' number='1' color='#d71670'></Heart>
-        <Heart text='15 min break' number='2' color='#d71670'></Heart>
-        <Heart text='15 min break' number='3' color='#d71670'></Heart>
+        <HeartsBar text='15 min break' number='3' color='#d71670'></HeartsBar>
+        <HeartsBar text='30 min break' number='3' color='#f2dc3b'></HeartsBar>
       </header>
     </div>
   );

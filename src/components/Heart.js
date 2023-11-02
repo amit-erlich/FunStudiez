@@ -5,8 +5,8 @@ import HeartIcon from '@mui/icons-material/FavoriteRounded';
 import BrokenHeartIcon from '@mui/icons-material/HeartBrokenRounded';
 
 const CustomButton = styled(IconButton)(({ theme, borderColor, bgColor }) => ({
-  width: '105px',
-  height: '105px',
+  width: '90px',
+  height: '90px',
   fontSize: '22px',
   fontStyle: 'bold',
   color: 'black',
@@ -15,21 +15,18 @@ const CustomButton = styled(IconButton)(({ theme, borderColor, bgColor }) => ({
   fontFamily: 'cursive',
   textTransform: 'none',
   lineHeight: '1.2',
-  borderRadius: '0%',
+  borderRadius: '50%',
   borderWidth: '5px',
   borderColor: borderColor,
-  //backgroundColor: bgColor,
   opacity: 1,
   '&:hover': {
     borderWidth: '5px',
     borderColor: borderColor,
-    //backgroundColor: bgColor,
     opacity: 0.7,
   },
 }));
 
 const Heart = ({
-    text,
     number,
     color
 }) => {
@@ -54,7 +51,7 @@ const Heart = ({
         <Typography
             style={{
                 position: 'absolute',
-                top: '35%',
+                top: '32%',
                 color: 'black',
                 fontWeight: 'bold',
                 fontSize: '22px',
@@ -62,17 +59,6 @@ const Heart = ({
             }}
         >
             {number}
-        </Typography>
-        <Typography
-            style={{
-            position: 'absolute',
-            top: '83%',
-            color: 'black',
-            fontSize: '15px',
-            fontFamily: 'cursive',
-            }}
-        >
-            {text}
         </Typography>
     </CustomButton>
   );
