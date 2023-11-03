@@ -13,7 +13,7 @@ const CustomButton = styled(Button)(({ theme, borderColor, bgColor }) => ({
   fontFamily: 'cursive',
   textTransform: 'none',
   lineHeight: '1.2',
-  borderRadius: '10%',
+  borderRadius: '0%',
   borderWidth: '5px',
   borderColor: borderColor,
   backgroundColor: bgColor,
