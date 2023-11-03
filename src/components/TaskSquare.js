@@ -7,7 +7,6 @@ const CustomButton = styled(Button)(({ theme, borderColor, bgColor }) => ({
   width: '140px',
   height: '140px',
   fontSize: '22px',
-  fontStyle: 'bold',
   color: 'black',
   overflow: 'hidden',
   fontWeight: 'bold',

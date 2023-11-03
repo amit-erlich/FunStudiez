@@ -5,38 +5,39 @@ import HeartIcon from '@mui/icons-material/FavoriteRounded';
 import BrokenHeartIcon from '@mui/icons-material/HeartBrokenRounded';
 
 const CustomButton = styled(IconButton)(({ theme, borderColor, bgColor }) => ({
-  width: '105px',
-  height: '105px',
+  width: '50px',
+  height: '50px',
   fontSize: '22px',
-  fontStyle: 'bold',
   color: 'black',
   overflow: 'hidden',
   fontWeight: 'bold',
   fontFamily: 'cursive',
   textTransform: 'none',
   lineHeight: '1.2',
-  borderRadius: '0%',
+  borderRadius: '50%',
   borderWidth: '5px',
   borderColor: borderColor,
-  //backgroundColor: bgColor,
   opacity: 1,
   '&:hover': {
     borderWidth: '5px',
     borderColor: borderColor,
-    //backgroundColor: bgColor,
     opacity: 0.7,
   },
 }));
 
 const Heart = ({
-    text,
-    number,
-    color
+  number,
+  color,
+  clickable,
+  onClick
 }) => {
   const [clicked, setClicked] = useState(false);
 
   const handleButtonClick = () => {
-    setClicked(true);
+    if (clickable) {
+      setClicked(true);
+      onClick();
+    }
   };
 
   const borderColor = color;
@@ -49,30 +50,18 @@ const Heart = ({
       bgColor={bgColor}
       onClick={handleButtonClick}
     >
-        {!clicked && <HeartIcon style={{ color: borderColor, fontSize: '85px' }} />}
-        {clicked && <BrokenHeartIcon style={{ color: bgColor, fontSize: '85px' }} />}
+        {!clicked && <HeartIcon style={{ color: borderColor, fontSize: '45px' }} />}
+        {clicked && <BrokenHeartIcon style={{ color: bgColor, fontSize: '45px' }} />}
         <Typography
             style={{
                 position: 'absolute',
-                top: '35%',
+                top: '20%',
                 color: 'black',
-                fontWeight: 'bold',
-                fontSize: '22px',
+                fontSize: '18px',
                 fontFamily: 'cursive',
             }}
         >
             {number}
-        </Typography>
-        <Typography
-            style={{
-            position: 'absolute',
-            top: '83%',
-            color: 'black',
-            fontSize: '15px',
-            fontFamily: 'cursive',
-            }}
-        >
-            {text}
         </Typography>
     </CustomButton>
   );
