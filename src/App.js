@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
+import { useTheme } from '@mui/material/styles';
 import Square from './components/TaskSquare';
 import HeartsBar from './components/HeartsBar';
 import CourseDetails from './components/CourseDetails';
@@ -9,12 +10,13 @@ const handleClick = () => {
   alert('clicked! Lets start')
 }
 
-// colors: '#d71670', '#f2dc3b', '#16d7ad'
 function App() {
+  const theme = useTheme();
   const [timerTime, setTimerTime] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const courseName = 'Complexity';
   const tastDate = '28/01/24';
+  const timerButtonColor = timerTime === 15 ? theme.palette.pink : theme.palette.green;
 
   const set15minTimer = () => {
     setTimerTime(15);
@@ -30,11 +32,11 @@ function App() {
     <div className="App">
       {showPopup && (
         <div className="overlay" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1 }}>
-        <div className="popup" style={{ backgroundColor: 'white', border: '2px solid #ccc', padding: '20px', textAlign: 'center', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}>
+        <div className="popup" style={{ backgroundColor: theme.palette.white, border: '2px solid #ccc', padding: '20px', textAlign: 'center', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}>
             <Typography variant="h4" gutterBottom>
               You have {timerTime} min
             </Typography>
-            <Button variant="contained" style={{ backgroundColor: 'green', width: "90px", marginRight: '10px' }} onClick={() => setShowPopup(false)}>
+            <Button variant="contained" style={{ backgroundColor: timerButtonColor, width: "90px", marginRight: '10px' }} onClick={() => setShowPopup(false)}>
               start
             </Button>
         </div>
@@ -42,8 +44,8 @@ function App() {
     )}
       <header className="App-header">
         <div style={{ position: 'absolute', top: 0, right: 0, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
-          <HeartsBar text='15 min break' number='3' color='#d71670' onClick={set15minTimer} />
-          <HeartsBar text='30 min break' number='3' color='#f2dc3b' onClick={set30minTimer} />
+          <HeartsBar text='15 min break' number='3' color={theme.palette.pink} onClick={set15minTimer} />
+          <HeartsBar text='30 min break' number='3' color={theme.palette.green} onClick={set30minTimer} />
         </div>
         <div style={{ position: 'absolute', top: 0, left: 0, display: 'flex', alignItems: 'flex-start', marginLeft: '10px' }}>
           <CourseDetails courseName={courseName} tastDate={tastDate}></CourseDetails>
@@ -51,20 +53,25 @@ function App() {
         <p>
           Welcome to Fun Studiez!
         </p>
-        <Button variant='contained' color='primary' onClick={handleClick}>
+        <Button variant='contained' style={{ backgroundColor: theme.palette.darkBlue }} onClick={handleClick}>
           start
         </Button>
         <Paper>
-          {/* <Grid>
-            <HeartsBar text='15 min break' number='3' color='#d71670'></HeartsBar>
-            <HeartsBar text='30 min break' number='3' color='#f2dc3b'></HeartsBar>
-          </Grid> */}
           <Grid>
-            <Square text='Read notebook no.1' number='15' color='#d71670'></Square>
-            <Square text='Read notebook no.2' number='15' color='#f2dc3b'></Square>
-            <Square text='Solve task no.5' number='3' color='#16d7ad'></Square>
-            <Square text='10 min break' number='2' color='#d71670' addStar={true}></Square>
-            <Square text='5 min break' number='3' color='#16d7ad' addStar={true}></Square>
+            <Square text='Read notebook no.1' color={theme.palette.pink}></Square>
+            <Square text='Read notebook no.2' color={theme.palette.pink}></Square>
+            <Square text='Solve task no.5' color={theme.palette.blueGreen}></Square>
+            <Square text='10 min break' number='2' color={theme.palette.pink} addStar={true}></Square>
+            <Square text='5 min break' number='3' color={theme.palette.yellow} addStar={true}></Square>
+            <Square text='Read presentation no.13' color={theme.palette.darkBlue}></Square>
+            <Square text='Read notebook no.8' color={theme.palette.pink}></Square>
+            <Square text='15 min break' number='6' color={theme.palette.green} addStar={true}></Square>
+            <Square text='Solve task no.4' color={theme.palette.blueGreen}></Square>
+            <Square text='20 min break' number='2' color={theme.palette.darkBlue} addStar={true}></Square>
+            <Square text='Read notebook no.7' color={theme.palette.pink}></Square>
+            <Square text='Read notebook no.15' color={theme.palette.pink}></Square>
+            <Square text='Read marathon no.2' color={theme.palette.green}></Square>
+            <Square text='10 min break' number='4' color={theme.palette.blueGreen} addStar={true}></Square>
           </Grid>
         </Paper>
       </header>

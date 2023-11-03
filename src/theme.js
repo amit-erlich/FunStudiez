@@ -4,41 +4,18 @@ const theme = createTheme({
   palette: {
     black: '#000000',
     white: '#FFFFFF',
-    darkBlue: '#1C4755',
-    redOrange: '#F66747',
-    yellow: '#EFC458',
-    green: '#00A087',
-    lightBlue: '#C2E3F3',
+    darkBlue: '#444FAD',
+    lightBlue: '#14C7DE',
+    blueGreen: '#19B092',
+    green: '#2FDA77',
+    yellow: '#F1C40F',
+    orange: '#FA9D00',
+    pink: '#E26A6A',
+    purple: '#B09CFF',
   },
-  typography: {
-    fontFamily: 'Assistant, Calibri, Arial'
-  },
-  overrides: {
-    MuiCssBaseline: {
-      '@global': {
-        '@font-face': [
-          {
-            fontFamily: 'Assistant',
-            src: `url(${AssistantURL}) format('truetype')`, // TTF format
-            fontWeight: 'normal',
-            fontStyle: 'normal',
-          },
-          {
-            fontFamily: 'Assistant',
-            src: `url(${AssistantRegularURL}) format('woff')`, // WOFF format
-            fontWeight: 'normal',
-            fontStyle: 'normal',
-          },
-          {
-            fontFamily: 'Assistant',
-            src: `url(${AssistantRegular2URL}) format('woff2')`, // WOFF format
-            fontWeight: 'normal',
-            fontStyle: 'normal',
-          },
-        ],
-      },
-    },
-  },
+//   typography: {
+//     fontFamily: 'Assistant, Calibri, Arial'
+//   },
 });
 
 export default theme;
