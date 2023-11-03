@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { styled } from '@mui/system';
 import { Typography, Paper, Grid, Container } from '@mui/material';
 import Heart from './Heart';
 
