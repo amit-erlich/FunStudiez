@@ -12,6 +12,8 @@ const handleClick = () => {
 function App() {
   const [timerTime, setTimerTime] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
+  const courseName = 'Complexity';
+  const tastDate = '28/01/24';
 
   const set15minTimer = () => {
     setTimerTime(15);
@@ -38,10 +40,18 @@ function App() {
         </div>
     )}
       <header className="App-header">
-        <div style={{ position: 'absolute', top: 0, left: 0, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
+        <div style={{ position: 'absolute', top: 0, right: 0, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
           <HeartsBar text='15 min break' number='3' color='#d71670' onClick={set15minTimer} />
-          <div style={{ marginLeft: '20px' }} />
           <HeartsBar text='30 min break' number='3' color='#f2dc3b' onClick={set30minTimer} />
+        </div>
+        <div style={{ position: 'absolute', top: 0, left: '20px', display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
+          <>
+            <p>
+              <span style={{ fontWeight: 'bold' }}>Course:</span> {courseName}
+              <br />
+              <span style={{ fontWeight: 'bold' }}>Test Date:</span> {tastDate}
+            </p>
+          </>
         </div>
         <p>
           Welcome to Fun Studiez!

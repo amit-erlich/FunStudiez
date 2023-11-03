@@ -33,27 +33,25 @@ const HeartsBar = ({
     }
 
     return (
-        <>
-            <Container>
-                <Typography style={{ 
-                    fontSize: '22px',
-                    fontFamily: 'cursive',
-                    }}>
-                        {text}
-                </Typography>
-                <Paper elevation={3} style={{ 
-                    padding: '10px',
-                    border: `5px solid ${color}`,
-                    borderRadius: '20px',
-                    backgroundColor: `${color}66`,
-                    }}>
-                    
-                    <Grid container spacing={0} justifyContent="center">
-                        {hearts}
-                    </Grid>
-                </Paper>
-            </Container>
-        </>
+        <Container>
+            <Typography style={{ 
+                fontSize: '20px',
+                fontFamily: 'cursive',
+                }}>
+                    {text}
+            </Typography>
+            <Paper elevation={3} style={{ 
+                padding: '10px',
+                border: `5px solid ${color}`,
+                borderRadius: '20px',
+                backgroundColor: `${color}66`,
+                }}>
+                
+                <Grid container spacing={0} justifyContent="center">
+                    {hearts}
+                </Grid>
+            </Paper>
+        </Container>
     );
 };
 
