@@ -1,8 +1,9 @@
 import './App.css';
 import React, { useState } from 'react';
 import Square from './components/TaskSquare';
-import { Button, Typography, Paper, Grid } from '@mui/material';
 import HeartsBar from './components/HeartsBar';
+import CourseDetails from './components/CourseDetails';
+import { Button, Typography, Paper, Grid } from '@mui/material';
 
 const handleClick = () => {
   alert('clicked! Lets start')
@@ -44,14 +45,8 @@ function App() {
           <HeartsBar text='15 min break' number='3' color='#d71670' onClick={set15minTimer} />
           <HeartsBar text='30 min break' number='3' color='#f2dc3b' onClick={set30minTimer} />
         </div>
-        <div style={{ position: 'absolute', top: 0, left: '20px', display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
-          <>
-            <p>
-              <span style={{ fontWeight: 'bold' }}>Course:</span> {courseName}
-              <br />
-              <span style={{ fontWeight: 'bold' }}>Test Date:</span> {tastDate}
-            </p>
-          </>
+        <div style={{ position: 'absolute', top: 0, left: 0, display: 'flex', alignItems: 'flex-start', marginLeft: '10px' }}>
+          <CourseDetails courseName={courseName} tastDate={tastDate}></CourseDetails>
         </div>
         <p>
           Welcome to Fun Studiez!
