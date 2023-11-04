@@ -6,6 +6,8 @@ import Square from './components/TaskSquare';
 import HeartsBar from './components/HeartsBar';
 import CourseDetails from './components/CourseDetails';
 import Popup from './components/Popup';
+import Timer from './components/Timer';
+import TimerPopup from './components/TimerPopup';
 
 const handleClick = () => {
   alert('clicked! Lets start')
@@ -14,25 +16,34 @@ const handleClick = () => {
 function App() {
   const theme = useTheme();
   const [timerTime, setTimerTime] = useState(0);
-  const [showPopup, setShowPopup] = useState(false);
+  const [showTimerPopup, setShowTimerPopup] = useState(false);
+  const [showTimerEndPopup, setShowTimerEndPopup] = useState(false);
   const courseName = 'Complexity';
   const tastDate = '28/01/24';
   const timerButtonColor = timerTime === 15 ? theme.palette.pink : theme.palette.green;
 
   const set15minTimer = () => {
     setTimerTime(15);
-    setShowPopup(true);
+    setShowTimerPopup(true);
   }
 
   const set30minTimer = () => {
     setTimerTime(30);
-    setShowPopup(true);
+    setShowTimerPopup(true);
   }
+
+  const handleTimerEnd = () => {
+    setShowTimerPopup(false);
+    setShowTimerEndPopup(true);
+  };
 
   return (
     <div className="App">
-      {showPopup && (
-        <Popup headline={`You have ${timerTime} min`} buttonText='Start timer' buttonColor={timerButtonColor} onClick={() => setShowPopup(false)}></Popup>
+      {showTimerPopup && (
+        <TimerPopup initialTime={60*timerTime} onTimerEnd={handleTimerEnd} color={timerButtonColor} closePopup={() => setShowTimerPopup(false)} />
+      )}
+      {showTimerEndPopup && (
+        <Popup headline={`Time's up!`} buttonColor={timerButtonColor} button1Text='Back to work' onClick1={() => setShowTimerEndPopup(false)}></Popup>
       )}
       <header className="App-header">
         <div style={{ position: 'absolute', top: 0, right: 0, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
