@@ -15,7 +15,6 @@ function App() {
   const theme = useTheme();
   const [timerTime, setTimerTime] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
-  const [showPopupTest, setShowPopupTest] = useState(true);
   const courseName = 'Complexity';
   const tastDate = '28/01/24';
   const timerButtonColor = timerTime === 15 ? theme.palette.pink : theme.palette.green;
@@ -32,7 +31,6 @@ function App() {
 
   return (
     <div className="App">
-      {showPopupTest && (<Popup headline={'Welcome!'} buttonText='Hi!' buttonColor={theme.palette.yellow} onClick={() => setShowPopupTest(false)}></Popup>)}
       {showPopup && (
         <Popup headline={`You have ${timerTime} min`} buttonText='Start timer' buttonColor={timerButtonColor} onClick={() => setShowPopup(false)}></Popup>
       )}
