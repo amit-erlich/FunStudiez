@@ -1,10 +1,11 @@
 import './App.css';
 import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
+import { Button, Typography, Paper, Grid } from '@mui/material';
 import Square from './components/TaskSquare';
 import HeartsBar from './components/HeartsBar';
 import CourseDetails from './components/CourseDetails';
-import { Button, Typography, Paper, Grid } from '@mui/material';
+import Popup from './components/Popup';
 
 const handleClick = () => {
   alert('clicked! Lets start')
@@ -31,17 +32,8 @@ function App() {
   return (
     <div className="App">
       {showPopup && (
-        <div className="overlay" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1 }}>
-        <div className="popup" style={{ backgroundColor: theme.palette.white, border: '2px solid #ccc', padding: '20px', textAlign: 'center', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)' }}>
-            <Typography variant="h5" gutterBottom>
-              You have {timerTime} min
-            </Typography>
-            <Button variant="contained" style={{ backgroundColor: timerButtonColor, width: "130px", marginRight: '10px' }} onClick={() => setShowPopup(false)}>
-              start timer
-            </Button>
-        </div>
-        </div>
-    )}
+        <Popup headline={`You have ${timerTime} min`} buttonText='Start timer' buttonColor={timerButtonColor} onClick={() => setShowPopup(false)}></Popup>
+      )}
       <header className="App-header">
         <div style={{ position: 'absolute', top: 0, right: 0, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
           <HeartsBar text='15 min break' number='3' color={theme.palette.pink} onClick={set15minTimer} />
