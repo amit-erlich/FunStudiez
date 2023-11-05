@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Button } from '@mui/material';
 
-const Timer = ({ initialTime, onTimerEnd }) => {
+const Timer = ({ initialTime, onTimerEnd, color }) => {
   const [time, setTime] = useState(initialTime);
   const [isRunning, setIsRunning] = useState(false);
+  const [buttonText, setButtonText] = useState('Start');
 
   useEffect(() => {
     let timer;
@@ -12,7 +14,7 @@ const Timer = ({ initialTime, onTimerEnd }) => {
         setTime((prevTime) => prevTime - 1);
       }, 1000);
     } else if (time === 0) {
-      onTimerEnd(); // Call the function when the timer reaches 0
+      onTimerEnd();
       setIsRunning(false);
     }
 
@@ -21,6 +23,7 @@ const Timer = ({ initialTime, onTimerEnd }) => {
 
   const startTimer = () => {
     setIsRunning(true);
+    setButtonText('Stop');
   };
 
   const resetTimer = () => {
@@ -30,15 +33,16 @@ const Timer = ({ initialTime, onTimerEnd }) => {
 
   const stopTimer = () => {
     setIsRunning(false);
+    setButtonText('Continue');
   };
 
   return (
-    <div>
-      <p>Time remaining: {time} seconds</p>
-      <button onClick={startTimer}>Start Timer</button>
-      <button onClick={resetTimer}>Reset Timer</button>
-      <button onClick={stopTimer}>Stop Timer</button>
-    </div>
+    <>
+        <p>{`Time remaining: ${Math.floor(time / 60)}:${String(time % 60).padStart(2, '0')}`}</p>
+        <Button variant="contained" style={{ backgroundColor: color }} onClick={isRunning ? stopTimer : startTimer}>
+            {buttonText}
+        </Button>
+    </>
   );
 };
 

@@ -5,10 +5,8 @@ import { useTheme } from '@mui/material/styles';
 const Popup = ({
     headline,
     buttonColor,
-    button1Text,
-    onClick1,
-    button2Text,
-    onClick2,
+    buttonText,
+    onClick,
 }) => {
     const theme = useTheme();
 
@@ -18,14 +16,9 @@ const Popup = ({
                 <Typography variant="h5" gutterBottom style={{ marginBottom: '30px'}}>
                     {headline}
                 </Typography>
-                <Button variant="contained" style={{ backgroundColor: buttonColor, marginRight: '10px' }} onClick={onClick1}>
-                    {button1Text}
+                <Button variant="contained" style={{ backgroundColor: buttonColor }} onClick={onClick}>
+                    {buttonText}
                 </Button>
-                {button2Text && (
-                    <Button variant="contained" style={{ backgroundColor: buttonColor, marginRight: '10px' }} onClick={onClick2}>
-                        {button2Text}
-                    </Button>
-                )}
                 
             </div>
         </div>

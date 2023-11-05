@@ -2,11 +2,10 @@ import './App.css';
 import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Button, Typography, Paper, Grid } from '@mui/material';
-import Square from './components/TaskSquare';
+import Square from './components/Square';
 import HeartsBar from './components/HeartsBar';
 import CourseDetails from './components/CourseDetails';
 import Popup from './components/Popup';
-import Timer from './components/Timer';
 import TimerPopup from './components/TimerPopup';
 
 const handleClick = () => {
@@ -43,7 +42,7 @@ function App() {
         <TimerPopup initialTime={60*timerTime} onTimerEnd={handleTimerEnd} color={timerButtonColor} closePopup={() => setShowTimerPopup(false)} />
       )}
       {showTimerEndPopup && (
-        <Popup headline={`Time's up!`} buttonColor={timerButtonColor} button1Text='Back to work' onClick1={() => setShowTimerEndPopup(false)}></Popup>
+        <Popup headline={`Time's up!`} buttonColor={timerButtonColor} buttonText='Back to work' onClick={() => setShowTimerEndPopup(false)} />
       )}
       <header className="App-header">
         <div style={{ position: 'absolute', top: 0, right: 0, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
