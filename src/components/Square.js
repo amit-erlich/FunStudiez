@@ -27,15 +27,20 @@ const CustomButton = styled(Button)(({ theme, borderColor, bgColor }) => ({
 }));
 
 const Square = ({
+    color,
+    isStar,
     text,
     number,
-    color,
-    addStar
+    breakTime,
+    onStarClick
 }) => {
   const [clicked, setClicked] = useState(false);
 
   const handleButtonClick = () => {
     setClicked(!clicked);
+    if (isStar) {
+      onStarClick(breakTime, color);
+    }
   };
 
   const borderColor = color;
@@ -48,35 +53,35 @@ const Square = ({
       bgColor={bgColor}
       onClick={handleButtonClick}
     >
-        {addStar && (
-            <>
-                <StarIcon style={{ color: borderColor, fontSize: '120px' }} />
-                <Typography
-                    style={{
-                        position: 'absolute',
-                        top: '39%',
-                        color: 'black',
-                        fontWeight: 'bold',
-                        fontSize: '22px',
-                        fontFamily: 'cursive',
-                    }}
-                >
-                    {number}
-                </Typography>
-                <Typography
-                    style={{
-                    position: 'absolute',
-                    top: '83%',
-                    color: 'black',
-                    fontSize: '15px',
-                    fontFamily: 'cursive',
-                    }}
-                >
-                    {text}
-                </Typography>
-            </>
-        )}
-        {!addStar && text}
+      {!isStar && `${text} no.${number}`}
+      {isStar && (
+        <>
+          <StarIcon style={{ color: borderColor, fontSize: '120px' }} />
+          <Typography
+            style={{
+              position: 'absolute',
+              top: '39%',
+              color: 'black',
+              fontWeight: 'bold',
+              fontSize: '22px',
+              fontFamily: 'cursive',
+            }}
+          >
+            {number}
+          </Typography>
+          <Typography
+            style={{
+            position: 'absolute',
+            top: '83%',
+            color: 'black',
+            fontSize: '15px',
+            fontFamily: 'cursive',
+            }}
+          >
+            {breakTime} min break
+          </Typography>
+        </>
+      )}
     </CustomButton>
   );
 };

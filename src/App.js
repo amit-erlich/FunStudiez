@@ -7,6 +7,7 @@ import HeartsBar from './components/HeartsBar';
 import CourseDetails from './components/CourseDetails';
 import Popup from './components/Popup';
 import TimerPopup from './components/TimerPopup';
+import StarSquare from './components/StarSquare';
 
 const handleClick = () => {
   alert('clicked! Lets start')
@@ -15,20 +16,21 @@ const handleClick = () => {
 function App() {
   const theme = useTheme();
   const [timerTime, setTimerTime] = useState(0);
+  const [timerButtonColor, setTimerButtonColor] = useState(theme.palette.black);
   const [showTimerPopup, setShowTimerPopup] = useState(false);
   const [showTimerEndPopup, setShowTimerEndPopup] = useState(false);
   const courseName = 'Complexity';
   const tastDate = '28/01/24';
-  const timerButtonColor = timerTime === 15 ? theme.palette.pink : theme.palette.green;
 
-  const set15minTimer = () => {
-    setTimerTime(15);
+  const setTimerPopup = (time, color) => {
+    setTimerTime(time);
+    setTimerButtonColor(color)
     setShowTimerPopup(true);
   }
 
-  const set30minTimer = () => {
-    setTimerTime(30);
-    setShowTimerPopup(true);
+  const handleStarSquareClicked = (time, color) => {
+    // TO-DO: check if can mark star
+    setTimerPopup(time, color);
   }
 
   const handleTimerEnd = () => {
@@ -46,8 +48,8 @@ function App() {
       )}
       <header className="App-header">
         <div style={{ position: 'absolute', top: 0, right: 0, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
-          <HeartsBar text='15 min break' number='3' color={theme.palette.pink} onClick={set15minTimer} />
-          <HeartsBar text='30 min break' number='3' color={theme.palette.green} onClick={set30minTimer} />
+          <HeartsBar text='15 min break' number='3' color={theme.palette.pink} onClick={() => setTimerPopup(15, theme.palette.pink)} />
+          <HeartsBar text='30 min break' number='3' color={theme.palette.green} onClick={() => setTimerPopup(30, theme.palette.green)} />
         </div>
         <div style={{ position: 'absolute', top: 0, left: 0, display: 'flex', alignItems: 'flex-start', marginLeft: '10px' }}>
           <CourseDetails courseName={courseName} tastDate={tastDate}></CourseDetails>
@@ -60,20 +62,20 @@ function App() {
         </Button>
         <Paper>
           <Grid>
-            <Square text='Read notebook no.1' color={theme.palette.pink}></Square>
-            <Square text='Read notebook no.2' color={theme.palette.pink}></Square>
-            <Square text='Solve task no.5' color={theme.palette.blueGreen}></Square>
-            <Square text='10 min break' number='2' color={theme.palette.pink} addStar={true}></Square>
-            <Square text='5 min break' number='3' color={theme.palette.yellow} addStar={true}></Square>
+            <Square color={theme.palette.pink} text='Read notebook' number='1' />
+            <Square color={theme.palette.pink} text='Read notebook' number='2' />
+            <Square color={theme.palette.blueGreen} text='Solve task' number='5' />
+            <StarSquare color={theme.palette.pink} number='2' breakTime='10' onClick={handleStarSquareClicked} />
+            <StarSquare color={theme.palette.yellow} number='3' breakTime='5' onClick={handleStarSquareClicked} />
             <Square text='Read presentation no.13' color={theme.palette.darkBlue}></Square>
             <Square text='Read notebook no.8' color={theme.palette.pink}></Square>
-            <Square text='15 min break' number='6' color={theme.palette.green} addStar={true}></Square>
+            <Square text='15 min break' number='6' color={theme.palette.green} isStar={true}></Square>
             <Square text='Solve task no.4' color={theme.palette.blueGreen}></Square>
-            <Square text='20 min break' number='2' color={theme.palette.darkBlue} addStar={true}></Square>
+            <Square text='20 min break' number='2' color={theme.palette.darkBlue} isStar={true}></Square>
             <Square text='Read notebook no.7' color={theme.palette.pink}></Square>
             <Square text='Read notebook no.15' color={theme.palette.pink}></Square>
             <Square text='Read marathon no.2' color={theme.palette.green}></Square>
-            <Square text='10 min break' number='4' color={theme.palette.blueGreen} addStar={true}></Square>
+            <Square text='10 min break' number='4' color={theme.palette.blueGreen} isStar={true}></Square>
           </Grid>
         </Paper>
       </header>
