@@ -8,6 +8,7 @@ import CourseDetails from './components/CourseDetails';
 import Popup from './components/Popup';
 import TimerPopup from './components/TimerPopup';
 import StarSquare from './components/StarSquare';
+import TaskSquare from './components/TaskSquare';
 
 const handleClick = () => {
   alert('clicked! Lets start')
@@ -61,21 +62,21 @@ function App() {
           start
         </Button>
         <Paper>
-          <Grid>
-            <Square color={theme.palette.pink} text='Read notebook' number='1' />
-            <Square color={theme.palette.pink} text='Read notebook' number='2' />
-            <Square color={theme.palette.blueGreen} text='Solve task' number='5' />
-            <StarSquare color={theme.palette.pink} number='2' breakTime='10' onClick={handleStarSquareClicked} />
+          <Grid style={{padding:'10px'}}>
+            <TaskSquare taskType='R' taskNumber='task1' number='1'/>
+            <TaskSquare taskType='R' taskNumber='task3' number='3'/>
+            <TaskSquare taskType='S' taskNumber='task1' number='5'/>
+            <StarSquare color={theme.palette.lightPurple} number='2' breakTime='10' onClick={handleStarSquareClicked} />
             <StarSquare color={theme.palette.yellow} number='3' breakTime='5' onClick={handleStarSquareClicked} />
-            <Square text='Read presentation no.13' color={theme.palette.darkBlue}></Square>
-            <Square text='Read notebook no.8' color={theme.palette.pink}></Square>
-            <Square text='15 min break' number='6' color={theme.palette.green} isStar={true}></Square>
-            <Square text='Solve task no.4' color={theme.palette.blueGreen}></Square>
-            <Square text='20 min break' number='2' color={theme.palette.darkBlue} isStar={true}></Square>
-            <Square text='Read notebook no.7' color={theme.palette.pink}></Square>
-            <Square text='Read notebook no.15' color={theme.palette.pink}></Square>
-            <Square text='Read marathon no.2' color={theme.palette.green}></Square>
-            <Square text='10 min break' number='4' color={theme.palette.blueGreen} isStar={true}></Square>
+            <TaskSquare taskType='R' taskNumber='task5' number='13'/>
+            <TaskSquare taskType='R' taskNumber='task4' number='8'/>
+            <TaskSquare taskType='R' taskNumber='task2' number='18'/>
+            <StarSquare color={theme.palette.green} number='6' breakTime='15' onClick={handleStarSquareClicked} />
+            <TaskSquare taskType='S' taskNumber='task3' number='4'/>
+            <StarSquare color={theme.palette.blueGreen} number='2' breakTime='20' onClick={handleStarSquareClicked} />
+            <TaskSquare taskType='R' taskNumber='task1' number='7'/>
+            <TaskSquare taskType='S' taskNumber='task2' number='2'/>
+            <StarSquare color={theme.palette.blueGreen} number='4' breakTime='10' onClick={handleStarSquareClicked} />
           </Grid>
         </Paper>
       </header>
