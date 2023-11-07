@@ -6,6 +6,7 @@ import StarIcon from '@mui/icons-material/StarRounded'; //StarRateRounded
 const CustomButton = styled(Button)(({ theme, borderColor, bgColor }) => ({
   width: '140px',
   height: '140px',
+  margin: '1px',
   fontSize: '20px',
   color: 'black',
   overflow: 'hidden',
@@ -13,7 +14,7 @@ const CustomButton = styled(Button)(({ theme, borderColor, bgColor }) => ({
   fontFamily: 'cursive',
   textTransform: 'none',
   lineHeight: '1.2',
-  borderRadius: '0%',
+  borderRadius: '10%',
   borderWidth: '5px',
   borderColor: borderColor,
   backgroundColor: bgColor,
