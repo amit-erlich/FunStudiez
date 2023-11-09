@@ -78,7 +78,7 @@ function App() {
     fillTaskSquares(taskSquares, 12, 'R', 'task2');
     fillTaskSquares(taskSquares, 9, 'S', 'task1');
     fillTaskSquares(taskSquares, 4, 'S', 'task2');
-    fillTaskSquares(taskSquares, 5, 'S', 'task3', 3);
+    fillTaskSquares(taskSquares, 4, 'S', 'task3', 3);
   
     return shuffleArray([...taskSquares]);
   }
