@@ -79,6 +79,12 @@ function App() {
     fillTaskSquares(taskSquares, 9, 'S', 'task1');
     fillTaskSquares(taskSquares, 4, 'S', 'task2');
     fillTaskSquares(taskSquares, 4, 'S', 'task3', 3);
+
+    theme['additionalTask']['task1']['text'] = 'Read 5 sentences';
+    fillTaskSquares(taskSquares, 6, 'O', 'task1');
+
+    theme['additionalTask']['task2']['text'] = 'Read formula sheet';
+    fillTaskSquares(taskSquares, 1, 'O', 'task2');
   
     return shuffleArray([...taskSquares]);
   }
