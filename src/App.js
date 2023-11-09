@@ -56,15 +56,19 @@ function App() {
     const isSolveTask3 = (taskType === 'S' && taskNumber === 'task3');
   
     for (let i = 1; i <= squareNumber; i++) {
-      array.push(<TaskSquare key={`${taskType}${i}`} taskType={taskType} taskNumber={taskNumber} number={isSolveTask3 ? questionNum : i} />);
+      array.push(<TaskSquare key={`${taskType}${taskNumber}${i}`} taskType={taskType} taskNumber={taskNumber} number={isSolveTask3 ? questionNum : i} />);
     }
 
-    // call fillStarSquares
+    const typy = taskType === 'R' ? 'readingTask' : (taskType === 'S' ? 'solvingTask' : 'additionalTask');
+    const { color, starGap } = theme[typy][taskNumber];
+    const starSquareNumber = Math.floor(squareNumber / starGap);
+
+    fillStarSquares(array, starSquareNumber, theme.palette[color], starGap);
   };
   
-  const fillStarSquares = (array, squareNumber, taskType, taskNumber, questionNum) => {
+  const fillStarSquares = (array, squareNumber, color, starGap) => {
     for (let i = 1; i <= squareNumber; i++) {
-      array.push(<StarSquare key={`${taskType}${i}`} color={theme.palette.lightPurple} number='2' breakTime={breakTimes[i % breakTimes.length]} onClick={handleStarSquareClicked} />);
+      array.push(<StarSquare key={`${color}${i}`} color={color} number={starGap * i} breakTime={breakTimes[i % breakTimes.length]} onClick={handleStarSquareClicked} />);
     }
   };
   

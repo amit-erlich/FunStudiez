@@ -20,50 +20,61 @@ const theme = createTheme({
         task1: {
             text: 'presentation',
             color: 'pink',
+            starGap: 2
         },
         task2: {
             text: 'notebook',
             color: 'lightPurple',
+            starGap: 3
         },
         task3: {
             text: 'assignment',
             color: 'darkBlue',
+            starGap: 3
         },
         task4: {
             text: 'marathon',
             color: 'green',
+            starGap: 2
         },
         task5: {
             text: 'up to page',
             color: 'lightBlue',
+            starGap: 50
         },
     },
     solvingTask: {
         task1: {
             text: 'assignment',
             color: 'blueGreen',
+            starGap: 1
         },
         task2: {
             text: 'test',
             color: 'orange',
+            starGap: 1
         },
         task3: {
             text: 'test questions',
             color: 'yellow',
+            starGap: 2
         },
     },
     additionalTask: {
         task1: {
             text: '',
             color: 'red',
+            starGap: 2
         },
         task2: {
             text: '',
             color: 'purple',
+            starGap: 2
         },
         task3: {
             text: '',
             color: 'gray',
+            starGap: 2
         },
     },
 });
