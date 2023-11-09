@@ -14,6 +14,15 @@ const handleClick = () => {
   alert('clicked! Lets start')
 }
 
+const shuffleArray = (array) => {
+  // Fisher-Yates shuffle algorithm
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
+
 function App() {
   const theme = useTheme();
   const [timerTime, setTimerTime] = useState(0);
@@ -22,6 +31,8 @@ function App() {
   const [showTimerEndPopup, setShowTimerEndPopup] = useState(false);
   const courseName = 'Complexity';
   const tastDate = '28/01/24';
+  const taskSquares = [];
+  const breakTimes = ['5', '10', '15', '20', '25', '30', '40'];
 
   const setTimerPopup = (time, color) => {
     setTimerTime(time);
@@ -38,6 +49,37 @@ function App() {
     setShowTimerPopup(false);
     setShowTimerEndPopup(true);
   };
+  
+  // ----------------------------------------------------------------
+  
+  const fillTaskSquares = (array, squareNumber, taskType, taskNumber, questionNum) => {
+    const isSolveTask3 = (taskType === 'S' && taskNumber === 'task3');
+  
+    for (let i = 1; i <= squareNumber; i++) {
+      array.push(<TaskSquare key={`${taskType}${i}`} taskType={taskType} taskNumber={taskNumber} number={isSolveTask3 ? questionNum : i} />);
+    }
+
+    // call fillStarSquares
+  };
+  
+  const fillStarSquares = (array, squareNumber, taskType, taskNumber, questionNum) => {
+    for (let i = 1; i <= squareNumber; i++) {
+      array.push(<StarSquare key={`${taskType}${i}`} color={theme.palette.lightPurple} number='2' breakTime={breakTimes[i % breakTimes.length]} onClick={handleStarSquareClicked} />);
+    }
+  };
+  
+  const initSquares = (taskSquares) => {
+  
+    fillTaskSquares(taskSquares, 8, 'R', 'task1');
+    fillTaskSquares(taskSquares, 12, 'R', 'task2');
+    fillTaskSquares(taskSquares, 9, 'S', 'task1');
+    fillTaskSquares(taskSquares, 4, 'S', 'task2');
+    fillTaskSquares(taskSquares, 5, 'S', 'task3', 3);
+  
+    return shuffleArray([...taskSquares]);
+  }
+
+  const shuffledTaskSquares = initSquares(taskSquares);
 
   return (
     <div className="App">
@@ -49,7 +91,7 @@ function App() {
       )}
       <header className="App-header">
         <div style={{ position: 'absolute', top: 0, right: 0, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
-          <HeartsBar text='15 min break' number='3' color={theme.palette.pink} onClick={() => setTimerPopup(15, theme.palette.pink)} />
+          <HeartsBar text='15 min break' number='3' color={theme.palette.red} onClick={() => setTimerPopup(15, theme.palette.pink)} />
           <HeartsBar text='30 min break' number='3' color={theme.palette.green} onClick={() => setTimerPopup(30, theme.palette.green)} />
         </div>
         <div style={{ position: 'absolute', top: 0, left: 0, display: 'flex', alignItems: 'flex-start', marginLeft: '10px' }}>
@@ -61,7 +103,7 @@ function App() {
         <Button variant='contained' style={{ backgroundColor: theme.palette.darkBlue }} onClick={handleClick}>
           start
         </Button>
-        <Paper>
+        {/* <Paper>
           <Grid style={{padding:'10px'}}>
             <TaskSquare taskType='R' taskNumber='task1' number='1'/>
             <TaskSquare taskType='R' taskNumber='task3' number='3'/>
@@ -78,7 +120,10 @@ function App() {
             <TaskSquare taskType='S' taskNumber='task2' number='2'/>
             <StarSquare color={theme.palette.blueGreen} number='4' breakTime='10' onClick={handleStarSquareClicked} />
           </Grid>
-        </Paper>
+        </Paper> */}
+        <div>
+          {shuffledTaskSquares.map((taskSquare) => taskSquare)}
+        </div>
       </header>
     </div>
   );
