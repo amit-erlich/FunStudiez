@@ -12,12 +12,15 @@ const shuffleArray = (array) => {
 };
 
 const SquaresPanel = ({ onClickStarSquare }) => {
+    console.log('---SquaresPanel rendered');
   const theme = useTheme();
   const [shuffledTaskSquares, setShuffledTaskSquares] = useState([]);
+  const [isShuffled, setisShuffled] = useState(false);
   const taskSquares = [];
   const breakTimes = ['5', '10', '15', '20', '25', '30', '40'];
   
   useEffect(() => {
+    console.log('Effect is running');
     const initSquares = () => {
       fillTaskSquares(taskSquares, 8, 'R', 'task1');
       fillTaskSquares(taskSquares, 12, 'R', 'task2');
@@ -32,11 +35,16 @@ const SquaresPanel = ({ onClickStarSquare }) => {
       fillTaskSquares(taskSquares, 1, 'O', 'task2');
 
       const shuffledSquares = shuffleArray([...taskSquares]);
-      setShuffledTaskSquares(shuffledSquares);
+      if (!isShuffled) { 
+        console.log('Shuffle');
+        setShuffledTaskSquares(shuffledSquares);
+        setisShuffled(true);
+      }
+      
     };
 
     initSquares();
-  }, []); // theme
+  }, [theme]);
 
   const fillTaskSquares = (array, squareNumber, taskType, taskNumber, questionNum) => {
     const isSolveTask3 = (taskType === 'S' && taskNumber === 'task3');
