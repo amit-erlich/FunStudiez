@@ -3,7 +3,7 @@ import { styled } from '@mui/system';
 import { Button, Typography } from '@mui/material';
 import StarIcon from '@mui/icons-material/StarRounded'; //StarRateRounded
 
-const CustomButton = styled(Button)(({ theme, borderColor, bgColor }) => ({
+const CustomButton = styled(Button)(({ borderColor, bgColor }) => ({
   width: '140px',
   height: '140px',
   margin: '1px',
@@ -33,12 +33,14 @@ const Square = ({
     text,
     number,
     breakTime,
+    onClick,
     onStarClick
 }) => {
   const [clicked, setClicked] = useState(false);
 
   const handleButtonClick = () => {
     setClicked(!clicked);
+    onClick(clicked);
     if (isStar && !clicked) {
       onStarClick(breakTime, color);
     }

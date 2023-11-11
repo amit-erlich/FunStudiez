@@ -20,7 +20,7 @@ const theme = createTheme({
         task1: {
             text: 'presentation',
             color: 'pink',
-            starGap: 2
+            starGap: 1
         },
         task2: {
             text: 'notebook',

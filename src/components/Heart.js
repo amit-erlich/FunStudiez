@@ -4,7 +4,7 @@ import { Button, Typography, IconButton } from '@mui/material';
 import HeartIcon from '@mui/icons-material/FavoriteRounded';
 import BrokenHeartIcon from '@mui/icons-material/HeartBrokenRounded';
 
-const CustomButton = styled(IconButton)(({ theme, borderColor, bgColor }) => ({
+const CustomButton = styled(IconButton)(({ borderColor }) => ({
   width: '50px',
   height: '50px',
   fontSize: '22px',
@@ -47,7 +47,6 @@ const Heart = ({
     <CustomButton
       variant="outlined"
       borderColor={borderColor}
-      bgColor={bgColor}
       onClick={handleButtonClick}
     >
         {!clicked && <HeartIcon style={{ color: borderColor, fontSize: '45px' }} />}

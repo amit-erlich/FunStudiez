@@ -11,16 +11,13 @@ const shuffleArray = (array) => {
   return array;
 };
 
-const SquaresPanel = ({ onClickStarSquare }) => {
-    console.log('---SquaresPanel rendered');
+const SquaresPanel = ({ updateSquareNumber, onClickSquare, onClickStarSquare }) => {
   const theme = useTheme();
   const [shuffledTaskSquares, setShuffledTaskSquares] = useState([]);
-  const [isShuffled, setisShuffled] = useState(false);
   const taskSquares = [];
   const breakTimes = ['5', '10', '15', '20', '25', '30', '40'];
   
   useEffect(() => {
-    console.log('Effect is running');
     const initSquares = () => {
       fillTaskSquares(taskSquares, 8, 'R', 'task1');
       fillTaskSquares(taskSquares, 12, 'R', 'task2');
@@ -34,13 +31,10 @@ const SquaresPanel = ({ onClickStarSquare }) => {
       theme['additionalTask']['task2']['text'] = 'Read formula sheet';
       fillTaskSquares(taskSquares, 1, 'O', 'task2');
 
+      updateSquareNumber(taskSquares.length);
+
       const shuffledSquares = shuffleArray([...taskSquares]);
-      if (!isShuffled) { 
-        console.log('Shuffle');
-        setShuffledTaskSquares(shuffledSquares);
-        setisShuffled(true);
-      }
-      
+      setShuffledTaskSquares(shuffledSquares);
     };
 
     initSquares();
@@ -50,7 +44,7 @@ const SquaresPanel = ({ onClickStarSquare }) => {
     const isSolveTask3 = (taskType === 'S' && taskNumber === 'task3');
   
     for (let i = 1; i <= squareNumber; i++) {
-      array.push(<TaskSquare key={`${taskType}${taskNumber}${i}`} taskType={taskType} taskNumber={taskNumber} number={isSolveTask3 ? questionNum : i} />);
+      array.push(<TaskSquare key={`${taskType}${taskNumber}${i}`} taskType={taskType} taskNumber={taskNumber} number={isSolveTask3 ? questionNum : i} onClick={onClickSquare} />);
     }
 
     const typy = taskType === 'R' ? 'readingTask' : (taskType === 'S' ? 'solvingTask' : 'additionalTask');
@@ -62,7 +56,7 @@ const SquaresPanel = ({ onClickStarSquare }) => {
   
   const fillStarSquares = (array, squareNumber, color, starGap) => {
     for (let i = 1; i <= squareNumber; i++) {
-      array.push(<StarSquare key={`${color}${i}`} color={color} number={starGap * i} breakTime={breakTimes[i % breakTimes.length]} onClick={onClickStarSquare} />);
+      array.push(<StarSquare key={`${color}${i}`} color={color} number={starGap * i} breakTime={breakTimes[(i - 1) % breakTimes.length]} onClick={onClickSquare} onStarClick={onClickStarSquare} />);
     }
   };
 

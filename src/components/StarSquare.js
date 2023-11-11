@@ -5,11 +5,12 @@ const StarSquare = ({
     color,
     number,
     breakTime,
-    onClick
+    onClick,
+    onStarClick
 }) => {
 
   return (
-    <Square color={color} isStar={true} number={number} breakTime={breakTime} onStarClick={onClick} />
+    <Square color={color} isStar={true} number={number} breakTime={breakTime} onClick={onClick} onStarClick={onStarClick} />
   );
 };
 

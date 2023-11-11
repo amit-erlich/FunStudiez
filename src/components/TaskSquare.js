@@ -6,6 +6,7 @@ const TaskSquare = ({
     taskType,
     taskNumber,
     number,
+    onClick
 }) => {
     const typy = taskType === 'R' ? 'readingTask' : (taskType === 'S' ? 'solvingTask' : 'additionalTask');
     const { text, color } = theme[typy][taskNumber];
@@ -19,7 +20,7 @@ const TaskSquare = ({
                     `Solve ${text} no.${number}`)));
 
   return (
-    <Square color={theme.palette[color]} text={squareText} />
+    <Square color={theme.palette[color]} text={squareText} onClick={onClick} />
   );
 };
 
