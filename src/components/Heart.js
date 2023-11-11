@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/system';
-import { Button, Typography, IconButton } from '@mui/material';
+import { Typography, IconButton } from '@mui/material';
 import HeartIcon from '@mui/icons-material/FavoriteRounded';
 import BrokenHeartIcon from '@mui/icons-material/HeartBrokenRounded';
 
