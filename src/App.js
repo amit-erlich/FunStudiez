@@ -93,7 +93,7 @@ function App() {
         <Button variant='contained' style={{ backgroundColor: theme.palette.darkBlue }} onClick={handleClick}>
           start
         </Button>
-        <ProgressAvatar index={progressIndex} />
+        <ProgressAvatar index={progressIndex} wholeNumber={squareNumber} />
         <SquaresPanel updateSquareNumber={updateUncoloredSquareNumber} onClickSquare={increaseOrDecreaseSquareNumber} onClickStarSquare={handleStarSquareClicked} />
       </header>
     </div>

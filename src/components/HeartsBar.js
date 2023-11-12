@@ -33,12 +33,6 @@ const HeartsBar = ({
 
     return (
         <Container>
-            <Typography style={{ 
-                fontSize: '20px',
-                fontFamily: 'cursive',
-                }}>
-                    {text}
-            </Typography>
             <Paper elevation={3} style={{ 
                 padding: '10px',
                 border: `5px solid ${color}`,
@@ -50,6 +44,12 @@ const HeartsBar = ({
                     {hearts}
                 </Grid>
             </Paper>
+            <Typography style={{ 
+                fontSize: '20px',
+                fontFamily: 'cursive',
+                }}>
+                    {text}
+            </Typography>
         </Container>
     );
 };
