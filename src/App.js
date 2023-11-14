@@ -8,6 +8,7 @@ import Popup from './components/Popup';
 import TimerPopup from './components/TimerPopup';
 import SquaresPanel from './components/SquaresPanel';
 import ProgressAvatar from './components/ProgressAvatar';
+import AppMainBar from './components/AppMainBar';
 
 function App() {
   const theme = useTheme();
@@ -80,14 +81,15 @@ function App() {
         <Popup headline={`Time's up!`} buttonColor={timerButtonColor} buttonText='Back to work' onClick={() => setShowTimerEndPopup(false)} />
       )}
       <header className="App-header">
-        <div style={{ position: 'absolute', top: 0, left: 0, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
+        <AppMainBar/>
+        <div style={{ position: 'absolute', top: 70, left: 20, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
           <HeartsBar text='15 min break' number='3' color={theme.palette.red} onClick={() => setTimerPopup(15, theme.palette.pink)} />
           <HeartsBar text='30 min break' number='3' color={theme.palette.green} onClick={() => setTimerPopup(30, theme.palette.green)} />
         </div>
-        <div style={{ position: 'absolute', top: 0, display: 'flex', alignItems: 'flex-start' }}>
+        <div style={{ position: 'absolute', top: 70, display: 'flex', alignItems: 'flex-start' }}>
           <CourseDetails courseName={courseName} tastDate={tastDate}></CourseDetails>
         </div>
-        <div style={{ position: 'absolute', top: 0, right: '10px', display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
+        <div style={{ position: 'absolute', top: 75, right: 20, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
           <ProgressAvatar index={progressIndex} wholeNumber={squareNumber} />
         </div>
         <div style={{ position: 'absolute', top: '30%', width: '90%', height: '450px', overflow: 'auto', border: `1px solid ${theme.palette.gray}`}}>
