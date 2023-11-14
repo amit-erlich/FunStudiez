@@ -92,7 +92,7 @@ function App() {
         <div style={{ position: 'absolute', top: 75, right: 20, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
           <ProgressAvatar index={progressIndex} wholeNumber={squareNumber} />
         </div>
-        <div style={{ position: 'absolute', top: '30%', width: '90%', height: '450px', overflow: 'auto', border: `1px solid ${theme.palette.gray}`}}>
+        <div style={{ position: 'absolute', top: '30%', maxWidth: '90vw', width: 'fit-content', maxHeight: '30vw', overflow: 'auto'}}>
           <SquaresPanel updateSquareNumber={updateUncoloredSquareNumber} onClickSquare={increaseOrDecreaseSquareNumber} onClickStarSquare={handleStarSquareClicked} />
         </div>
       </header>
