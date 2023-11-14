@@ -7,10 +7,13 @@ const CourseDetails = ({
 
     return (
         <>
-            <p style={{ fontSize: '32px' }}>
-              <span style={{ fontWeight: 'bold' }}>Course:</span> {courseName}
-              <br/>
-              <span style={{ fontWeight: 'bold' }}>Test Date:</span> {tastDate}
+            <p>
+                <p style={{ marginTop: '-20px' }}>
+                    <span style={{ fontWeight: 'bold', fontSize: '200%' }}>{courseName}</span>
+                </p>
+                <p style={{ fontSize: '110%', marginTop: '-20px' }}>
+                <span style={{ fontWeight: 'bold' }}>Test Date:</span> {tastDate}
+                </p>
             </p>
         </>
     );

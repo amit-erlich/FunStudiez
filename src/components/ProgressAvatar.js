@@ -33,8 +33,8 @@ import SportsScoreRoundedIcon from '@mui/icons-material/SportsScoreRounded';
 // } from '@mui/icons-material';
 
 const CustomButton = styled(IconButton)(({ borderColor }) => ({
-    width: '50px',
-    height: '50px',
+    width: '90px',
+    height: '90px',
     fontSize: '22px',
     color: 'black',
     overflow: 'hidden',
@@ -92,7 +92,7 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
           borderColor={theme.palette['gray']}
           onClick={handleButtonClick}
         >
-            <CurrentIcon style={{ color: theme.palette['gray'], fontSize: '45px' }} />
+            <CurrentIcon style={{ color: theme.palette['gray'], fontSize: '70px' }} />
         </CustomButton>
         <Popover
           open={isOpen}

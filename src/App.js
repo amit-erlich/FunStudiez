@@ -80,21 +80,19 @@ function App() {
         <Popup headline={`Time's up!`} buttonColor={timerButtonColor} buttonText='Back to work' onClick={() => setShowTimerEndPopup(false)} />
       )}
       <header className="App-header">
-        <div style={{ position: 'absolute', top: 0, right: 0, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
+        <div style={{ position: 'absolute', top: 0, left: 0, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
           <HeartsBar text='15 min break' number='3' color={theme.palette.red} onClick={() => setTimerPopup(15, theme.palette.pink)} />
           <HeartsBar text='30 min break' number='3' color={theme.palette.green} onClick={() => setTimerPopup(30, theme.palette.green)} />
         </div>
-        <div style={{ position: 'absolute', top: 0, left: 0, display: 'flex', alignItems: 'flex-start', marginLeft: '10px' }}>
+        <div style={{ position: 'absolute', top: 0, display: 'flex', alignItems: 'flex-start' }}>
           <CourseDetails courseName={courseName} tastDate={tastDate}></CourseDetails>
         </div>
-        <p>
-          Welcome to Fun Studiez!
-        </p>
-        <Button variant='contained' style={{ backgroundColor: theme.palette.darkBlue }} onClick={handleClick}>
-          start
-        </Button>
-        <ProgressAvatar index={progressIndex} wholeNumber={squareNumber} />
-        <SquaresPanel updateSquareNumber={updateUncoloredSquareNumber} onClickSquare={increaseOrDecreaseSquareNumber} onClickStarSquare={handleStarSquareClicked} />
+        <div style={{ position: 'absolute', top: 0, right: '10px', display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
+          <ProgressAvatar index={progressIndex} wholeNumber={squareNumber} />
+        </div>
+        <div style={{ position: 'absolute', top: '30%', width: '90%', height: '450px', overflow: 'auto', border: `1px solid ${theme.palette.gray}`}}>
+          <SquaresPanel updateSquareNumber={updateUncoloredSquareNumber} onClickSquare={increaseOrDecreaseSquareNumber} onClickStarSquare={handleStarSquareClicked} />
+        </div>
       </header>
     </div>
   );
