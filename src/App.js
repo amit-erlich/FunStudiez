@@ -9,6 +9,7 @@ import TimerPopup from './components/TimerPopup';
 import SquaresPanel from './components/SquaresPanel';
 import ProgressAvatar from './components/ProgressAvatar';
 import AppMainBar from './components/AppMainBar';
+import Achievements from './components/Achievements';
 
 function App() {
   const theme = useTheme();
@@ -90,6 +91,9 @@ function App() {
           <CourseDetails courseName={courseName} tastDate={tastDate}></CourseDetails>
         </div>
         <div style={{ position: 'absolute', top: 75, right: 20, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
+          <Achievements index={progressIndex}/>
+        </div>
+        <div style={{ position: 'absolute', top: 75, right: 120, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
           <ProgressAvatar index={progressIndex} wholeNumber={squareNumber} />
         </div>
         <div style={{ position: 'absolute', top: '30%', maxWidth: '90vw', width: 'fit-content', maxHeight: '30vw', overflow: 'auto'}}>

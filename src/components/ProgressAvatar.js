@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
-import { Typography, IconButton, Popover, Stepper, Step, StepLabel, StepConnector } from '@mui/material';
+import { Typography, IconButton, Popover, Stepper, Step, StepLabel, StepConnector, Tooltip } from '@mui/material';
 
 import AssistWalkerRoundedIcon from '@mui/icons-material/AssistWalkerRounded';
 import ElderlyRoundedIcon from '@mui/icons-material/ElderlyRounded';
@@ -66,13 +66,15 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
   
     return (
       <>
-        <CustomButton
-          variant="outlined"
-          borderColor={theme.palette['gray']}
-          onClick={handleButtonClick}
-        >
-            <CurrentIcon style={{ color: theme.palette['gray'], fontSize: '70px' }} />
-        </CustomButton>
+        <Tooltip title={<Typography fontSize='16px'>Progress</Typography>} arrow>
+          <CustomButton
+            variant="outlined"
+            borderColor={theme.palette['gray']}
+            onClick={handleButtonClick}
+          >
+              <CurrentIcon style={{ color: theme.palette['gray'], fontSize: '70px' }} />
+          </CustomButton>
+        </Tooltip>
         <Popover
           open={isOpen}
           anchorEl={anchorEl}
