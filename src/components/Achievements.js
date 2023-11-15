@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
-import { Typography, IconButton, Popover, Tooltip } from '@mui/material';
+import { Typography, IconButton, Popover, Tooltip, Snackbar } from '@mui/material';
 
 import WorkspacePremiumRoundedIcon from '@mui/icons-material/WorkspacePremiumRounded';
 import CelebrationRoundedIcon from '@mui/icons-material/CelebrationRounded';
@@ -65,11 +65,11 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
     const [anchorEl, setAnchorEl] = useState(null);
     
     const achievementItems = [
-        { condition: currentColoredSquares >= 0, text: 'starting' },
-        { condition: currentColoredSquares >= 1, text: 'colored first' },
-        { condition: currentColoredSquares >= 5, text: '5 colored' },
-        { condition: currentColoredSquares >= 10, text: '10 colored' },
-        { condition: currentColoredSquares >= 12, text: 'first star' },
+        { condition: currentColoredSquares >= 0, text: 'starting new study' },
+        { condition: currentColoredSquares >= 1, text: 'first square colored' },
+        { condition: currentColoredSquares >= 5, text: '5 colored squares' },
+        { condition: currentColoredSquares >= 10, text: '10 colored squares' },
+        { condition: currentColoredSquares >= 12, text: 'first star colored' },
         { condition: currentColoredSquares >= 14, text: 'all stars in color' },
         { condition: currentColoredSquares >= 16, text: 'all stars' },
         { condition: currentColoredSquares >= 18, text: 'all tasks in color' },
@@ -83,7 +83,23 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
         { condition: currentColoredSquares === squareNumber, text: 'all colored' },
       ];
     const [conditions, setConditions] = useState(achievementItems.map(() => false));
+    const [newAchievementText, setNewAchievementText] = useState(achievementItems[0].text);
+
+    const getIconColor = (currentIndex) => {
+        if (achievementItems[currentIndex].condition && (squareNumber != -1) && !conditions[currentIndex]) {
+            setConditions((prevConditions) => {
+                const newConditions = [...prevConditions];
+                newConditions[currentIndex] = true;
+                return newConditions;
+            });
+            setNewAchievementText(achievementItems[currentIndex].text);
+            handleClick()
+        }
+
+        return conditions[currentIndex] ? theme.palette.yellow : theme.palette.gray;
+    }
   
+
     const handleButtonClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -94,17 +110,20 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
 
     const isOpen = Boolean(anchorEl);
 
-    const getIconColor = (currentIndex) => {
-        if (achievementItems[currentIndex].condition && (squareNumber != -1) && !conditions[currentIndex]) {
-            setConditions((prevConditions) => {
-                const newConditions = [...prevConditions];
-                newConditions[currentIndex] = true;
-                return newConditions;
-            });
+
+    const [open, setOpen] = useState(false);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
         }
 
-        return conditions[currentIndex] ? theme.palette.yellow : theme.palette.gray;
-    }
+        setOpen(false);
+    };
   
     return (
       <>
@@ -151,6 +170,14 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
                 ))}
           </div>
         </Popover>
+        <Snackbar
+            open={open}
+            autoHideDuration={5000} // Duration in milliseconds (5 seconds in this case)
+            onClose={handleClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} // Position of the Snackbar
+            message={`NEW achievement! ${newAchievementText}`}
+        >
+        </Snackbar>
       </>
     );
   };
