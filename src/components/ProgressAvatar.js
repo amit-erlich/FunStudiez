@@ -112,7 +112,7 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
                           alignItems: 'center',
                         }}
                       >
-                        <Icon style={{ color: i <= index ? theme.palette['green'] : theme.palette['gray'], fontSize: '44px' }} />
+                        <Icon style={{ color: (i < index) || (index === 9) ? theme.palette['green'] : theme.palette['gray'], fontSize: '44px' }} />
                         <Typography
                           variant="body2"
                           style={{
