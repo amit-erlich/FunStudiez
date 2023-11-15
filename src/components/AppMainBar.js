@@ -50,7 +50,7 @@ function AppMainBar() {
                 </Toolbar>
             </AppBar>
             <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-                <Paper sx={{ backgroundColor: backgroundColor, width: '250px', height: '100%' }}>
+                <Paper sx={{ backgroundColor: theme.palette.white, width: '250px', height: '100%' }}>
                     <List>
                     {menuItems.map((item, index) => (
                         <ListItem button key={index} onClick={item.onClick}>
