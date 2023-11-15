@@ -91,7 +91,7 @@ function App() {
           <CourseDetails courseName={courseName} tastDate={tastDate}></CourseDetails>
         </div>
         <div style={{ position: 'absolute', top: 75, right: 20, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
-          <Achievements index={progressIndex}/>
+          <Achievements currentColoredSquares={squareNumber - uncoloredSquareNumber} squareNumber={squareNumber}/>
         </div>
         <div style={{ position: 'absolute', top: 75, right: 120, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
           <ProgressAvatar index={progressIndex} wholeNumber={squareNumber} />

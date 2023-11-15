@@ -60,9 +60,29 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
     CelebrationRoundedIcon,
   ];
   
-  const Achievements = ({ index }) => {
+  const Achievements = ({ currentColoredSquares, squareNumber }) => {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState(null);
+    
+    const achievementItems = [
+        { condition: currentColoredSquares >= 0, text: 'starting' },
+        { condition: currentColoredSquares >= 1, text: 'colored first' },
+        { condition: currentColoredSquares >= 5, text: '5 colored' },
+        { condition: currentColoredSquares >= 10, text: '10 colored' },
+        { condition: currentColoredSquares >= 12, text: 'first star' },
+        { condition: currentColoredSquares >= 14, text: 'all stars in color' },
+        { condition: currentColoredSquares >= 16, text: 'all stars' },
+        { condition: currentColoredSquares >= 18, text: 'all tasks in color' },
+        { condition: currentColoredSquares >= 20, text: 'uncolored' },
+        { condition: currentColoredSquares >= 22, text: 'two different colors' },
+        { condition: currentColoredSquares >= 25, text: 'colored each color' },
+        { condition: currentColoredSquares >= squareNumber / 4, text: '25% colored' },
+        { condition: currentColoredSquares >= squareNumber / 2, text: '50% colored' },
+        { condition: currentColoredSquares >= (squareNumber / 4) * 3, text: '75% colored' },
+        { condition: currentColoredSquares + 2 >= squareNumber, text: 'almost finish' },
+        { condition: currentColoredSquares === squareNumber, text: 'all colored' },
+      ];
+    const [conditions, setConditions] = useState(achievementItems.map(() => false));
   
     const handleButtonClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -73,6 +93,18 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
     };
 
     const isOpen = Boolean(anchorEl);
+
+    const getIconColor = (currentIndex) => {
+        if (achievementItems[currentIndex].condition && (squareNumber != -1) && !conditions[currentIndex]) {
+            setConditions((prevConditions) => {
+                const newConditions = [...prevConditions];
+                newConditions[currentIndex] = true;
+                return newConditions;
+            });
+        }
+
+        return conditions[currentIndex] ? theme.palette.yellow : theme.palette.gray;
+    }
   
     return (
       <>
@@ -109,30 +141,14 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
           >
             Achievements
           </Typography>
-          <div style={{ padding: '16px', position: 'relative', width: '36vw', maxHeight: '20vw', overflow: 'auto' }}>
-            {/* {progressIcons.map((Icon, i) => (
-                <div key={i}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
-              >
-                <Icon style={{ color: theme.palette['gray'], fontSize: '44px' }} />
-                <Typography
-                  variant="body2"
-                  style={{
-                    textAlign: 'center',
-                    marginTop: '4px',
-                  }}
-                >
-                  icon
-                </Typography>
-              </div>
-              ))} */}
-              {achievementIcons.map((Icon, i) => (
-                <Icon key={i} style={{ color: theme.palette['gray'], fontSize: '44px', padding: '10px'}} />
-              ))}
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', padding: '16px', position: 'relative', maxWidth: '34vw', width: '100%', maxHeight: '20vw', overflow: 'auto' }}>
+                {achievementIcons.map((Icon, index) => (
+                    <Tooltip title={<Typography fontSize='16px'>{achievementItems[index].text}</Typography>} arrow>
+                        <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '10px' }}>
+                            <Icon style={{ color: getIconColor(index), fontSize: '2.5rem', marginBottom: '10px' }} />
+                        </div>
+                    </Tooltip>
+                ))}
           </div>
         </Popover>
       </>
