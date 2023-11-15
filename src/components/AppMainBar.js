@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import { Paper } from '@mui/material';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import { AppBar, Box, Toolbar, Typography, IconButton, Drawer, Paper, List, ListItem, ListItemText } from '@mui/material';
+
 import MenuIcon from '@mui/icons-material/Menu';
-import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import NoteAddRoundedIcon from '@mui/icons-material/NoteAddRounded';
 import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
+
 import theme from '../theme';
+import HelpButton from './HelpButton';
 
 function AppMainBar() {
     const backgroundColor = theme.palette.yellow;
@@ -54,14 +46,7 @@ function AppMainBar() {
                             FunStudiezzz
                         </Typography>
                     </div>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                    >
-                        <HelpRoundedIcon style={{ fontSize: '2rem' }}/>
-                    </IconButton>
+                    <HelpButton />
                 </Toolbar>
             </AppBar>
             <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>

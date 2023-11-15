@@ -3,34 +3,16 @@ import { styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
 import { Typography, IconButton, Popover, Stepper, Step, StepLabel, StepConnector } from '@mui/material';
 
-import ManRoundedIcon from '@mui/icons-material/ManRounded'; // ?
 import AssistWalkerRoundedIcon from '@mui/icons-material/AssistWalkerRounded';
 import ElderlyRoundedIcon from '@mui/icons-material/ElderlyRounded';
-import HikingRoundedIcon from '@mui/icons-material/HikingRounded'; // ?
 import DirectionsWalkRoundedIcon from '@mui/icons-material/DirectionsWalkRounded';
 import DirectionsRunRoundedIcon from '@mui/icons-material/DirectionsRunRounded';
-import SkateboardingRoundedIcon from '@mui/icons-material/SkateboardingRounded'; // ?
 import PoolRoundedIcon from '@mui/icons-material/PoolRounded';
 import KayakingRoundedIcon from '@mui/icons-material/KayakingRounded';
-import SurfingRoundedIcon from '@mui/icons-material/SurfingRounded'; // ?
 import KitesurfingRoundedIcon from '@mui/icons-material/KitesurfingRounded';
 import FlightTakeoffRoundedIcon from '@mui/icons-material/FlightTakeoffRounded';
-import AirplanemodeActiveRoundedIcon from '@mui/icons-material/AirplanemodeActiveRounded'; // ?
-import FlightRoundedIcon from '@mui/icons-material/FlightRounded'; // ?
 import RocketLaunchRoundedIcon from '@mui/icons-material/RocketLaunchRounded';
 import SportsScoreRoundedIcon from '@mui/icons-material/SportsScoreRounded';
-
-// import { AssistWalkerRoundedIcon,
-//   ElderlyRoundedIcon,
-//   DirectionsWalkRoundedIcon,
-//   DirectionsRunRoundedIcon,
-//   PoolRoundedIcon,
-//   KayakingRoundedIcon,
-//   KitesurfingRoundedIcon,
-//   FlightTakeoffRoundedIcon,
-//   RocketLaunchRoundedIcon,
-//   SportsScoreRoundedIcon,
-// } from '@mui/icons-material';
 
 const CustomButton = styled(IconButton)(({ borderColor }) => ({
     width: '90px',
@@ -79,11 +61,8 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
     };
 
     const CurrentIcon = progressIcons[index];
-    const isOpen = Boolean(anchorEl);
-    
     const tenPercent = Math.ceil((wholeNumber - 1) / 9);
-    console.log(`tenPercent = ${tenPercent}`);
-    console.log(`wholeNumber = ${wholeNumber}`);
+    const isOpen = Boolean(anchorEl);
   
     return (
       <>
