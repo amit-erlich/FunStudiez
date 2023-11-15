@@ -5,13 +5,16 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
+import { Paper } from '@mui/material';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import { Paper } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import HelpRoundedIcon from '@mui/icons-material/HelpRounded';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import NoteAddRoundedIcon from '@mui/icons-material/NoteAddRounded';
+import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
 import theme from '../theme';
 
 function AppMainBar() {
@@ -27,9 +30,9 @@ function AppMainBar() {
     };
 
     const menuItems = [
-        { text: 'Home', onClick: () => console.log('Home clicked') },
-        { text: 'New Study', onClick: () => console.log('New Study clicked') },
-        { text: 'Previous Studies', onClick: () => console.log('Previous Studies clicked') },
+        { icon: <HomeRoundedIcon style={{ fontSize: '2rem', paddingRight: '10px' }}/>, text: 'Home', onClick: () => console.log('Home clicked') },
+        { icon: <NoteAddRoundedIcon style={{ fontSize: '2rem', paddingRight: '10px' }}/>, text: 'New Study', onClick: () => console.log('New Study clicked') },
+        { icon: <DescriptionRoundedIcon style={{ fontSize: '2rem', paddingRight: '10px' }}/>, text: 'Previous Studies', onClick: () => console.log('Previous Studies clicked') },
     ];
     
     return (
@@ -66,10 +69,11 @@ function AppMainBar() {
                     <List>
                     {menuItems.map((item, index) => (
                         <ListItem button key={index} onClick={item.onClick}>
-                        <ListItemText 
-                            primary={item.text}
-                            primaryTypographyProps={{ style: { color: theme.palette.black, fontSize: '1.4rem' } }}
-                        />
+                            {item.icon}
+                            <ListItemText
+                                primary={item.text}
+                                primaryTypographyProps={{ style: { color: theme.palette.black, fontSize: '1.4rem' } }}
+                            />
                         </ListItem>
                     ))}
                     </List>
