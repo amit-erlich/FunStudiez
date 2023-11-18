@@ -35,44 +35,54 @@ function App() {
     taskText: taskText,
   });
 
-  const createNewStudy = (settingArray, additionatText) => {
-    let textIndex = 0;
-
-    for (let i = 1; i <= settingArray.length; i++) {
-      const type = settingArray[i].taskType === 'R' ? 'readingTask' : (settingArray[i].taskType === 'S' ? 'solvingTask' : 'additionalTask');
-      const starGap = theme[type][settingArray[i].taskNumber].starGap;
-      const starSquareNumber = Math.floor(settingArray[i].squareNumber / starGap);
-      const text = type === 'additionalTask' ? additionatText[textIndex++]: '';
-
-      const taskKey = createTaskKey(type, `task${settingArray[i].taskNumber}`);
-      const taskData = initializeTaskData(squareNumber, starSquareNumber, text);
-      studyData[taskKey] = taskData;
-    }
-  }
-
   const initializeExampleSettingArray = (taskType, taskNumber, squareNumber) => ({
     taskType: taskType,
     taskNumber: taskNumber,
     squareNumber: squareNumber,
   });
 
-  const creatExampleStudy = () => {
-    const settingArray = [];
+  const createNewStudy = (settingArray, additionatText) => {
+    let textIndex = 0;
 
-    settingArray.push(initializeExampleSettingArray('R', 1, 8));
-    settingArray.push(initializeExampleSettingArray('R', 2, 12));
+    for (let i = 0; i < settingArray.length; i++) {
+      const type = settingArray[i].taskType === 'R' ? 'readingTask' : (settingArray[i].taskType === 'S' ? 'solvingTask' : 'additionalTask');
+      const {starGap} = theme[type][`task${settingArray[i].taskNumber}`];
+      const starSquareNumber = Math.floor(settingArray[i].squareNumber / starGap);
+      const text = type === 'additionalTask' ? additionatText[textIndex++]: '';
 
-    settingArray.push(initializeExampleSettingArray('S', 1, 9));
-    settingArray.push(initializeExampleSettingArray('S', 2, 4));
-    settingArray.push(initializeExampleSettingArray('S', 3, 4));
-
-    settingArray.push(initializeExampleSettingArray('O', 1, 6));
-    settingArray.push(initializeExampleSettingArray('O', 2, 1));
-
-    const additionatText = ['Read 5 sentences', 'Read formula sheet'];
-
-    createNewStudy(settingArray, additionatText);
+      //const taskKey = createTaskKey(type, `task${settingArray[i].taskNumber}`);
+      const taskKey = `${type}_task${settingArray[i].taskNumber}`;
+      const taskData = initializeTaskData(settingArray[i].squareNumber, starSquareNumber, text);
+      studyData[taskKey] = taskData;
+    }
   }
+
+  
+
+  useEffect(() => {
+    const creatExampleStudy = () => {
+      const settingArray = [];
+  
+      settingArray.push(initializeExampleSettingArray('R', 1, 8));
+      settingArray.push(initializeExampleSettingArray('R', 2, 12));
+  
+      settingArray.push(initializeExampleSettingArray('S', 1, 9));
+      settingArray.push(initializeExampleSettingArray('S', 2, 4));
+      settingArray.push(initializeExampleSettingArray('S', 3, 4));
+  
+      settingArray.push(initializeExampleSettingArray('O', 1, 6));
+      settingArray.push(initializeExampleSettingArray('O', 2, 1));
+  
+      const additionatText = ['Read 5 sentences', 'Read formula sheet'];
+  
+      createNewStudy(settingArray, additionatText);
+      updateUncoloredSquareNumber(8 + 12 + 9 + 4 + 4 + 6 + 1);
+    }
+    
+    console.log('------------------- calling creatExampleStudy');
+    creatExampleStudy();
+    console.log('------------------- creatExampleStudy end');
+  }, [theme]);
 
   //---------------------------------------------------------
 
@@ -122,6 +132,10 @@ function App() {
     } 
   };
 
+  
+
+  //console.log(`in App.js, studyData.length=${Object.keys(studyData).length}`);
+
   return (
     <div className="App">
       {showTimerPopup && (
@@ -146,7 +160,7 @@ function App() {
           <ProgressAvatar index={progressIndex} wholeNumber={squareNumber} />
         </div>
         <div style={{ position: 'absolute', top: '30%', maxWidth: '90vw', width: 'fit-content', maxHeight: '30vw', overflow: 'auto'}}>
-          <SquaresPanel updateSquareNumber={updateUncoloredSquareNumber} onClickSquare={increaseOrDecreaseSquareNumber} onClickStarSquare={handleStarSquareClicked} />
+          <SquaresPanel squaresData={studyData} updateSquareNumber={updateUncoloredSquareNumber} onClickSquare={increaseOrDecreaseSquareNumber} onClickStarSquare={handleStarSquareClicked} />
         </div>
       </header>
     </div>
