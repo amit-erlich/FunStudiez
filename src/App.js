@@ -41,6 +41,7 @@ function App() {
 
   const createNewStudy = (settingArray, additionatText) => {
     let textIndex = 0;
+    let countSquares = 0;
 
     for (let i = 0; i < settingArray.length; i++) {
       const type = settingArray[i].taskType === 'R' ? 'readingTask' : (settingArray[i].taskType === 'S' ? 'solvingTask' : 'additionalTask');
@@ -51,7 +52,11 @@ function App() {
       const taskKey = `${type}_task${settingArray[i].taskNumber}`;
       const taskData = initializeTaskData(settingArray[i].squareNumber, starSquareNumber, settingArray[i].questionsNumber, text);
       studyData[taskKey] = taskData;
+
+      countSquares += settingArray[i].squareNumber + starSquareNumber;
     }
+
+    updateUncoloredSquareNumber(countSquares);
   }
 
   useEffect(() => {
@@ -71,7 +76,6 @@ function App() {
       const additionatText = ['Read 5 sentences', 'Read formula sheet'];
   
       createNewStudy(settingArray, additionatText);
-      updateUncoloredSquareNumber(8 + 12 + 9 + 4 + 4 + 6 + 1);
     }
     creatExampleStudy();
   }, [theme]);

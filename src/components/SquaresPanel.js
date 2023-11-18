@@ -47,13 +47,13 @@ const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
     const isSolveTask3 = (taskType === 'solvingTask' && taskNumber === 'task3');
   
     for (let i = 1; i <= squareNumber.length; i++) {
-      array.push(<TaskSquare key={`${taskType}${taskNumber}${i}`} isColored={squareNumber[i]} taskType={taskType} taskNumber={taskNumber} number={isSolveTask3 ? questionNum : i} onClick={onClickSquare} />);
+      array.push(<TaskSquare key={`${taskType}${taskNumber}${i}`} isColored={squareNumber[i - 1]} taskType={taskType} taskNumber={taskNumber} number={isSolveTask3 ? questionNum : i} onClick={onClickSquare} />);
     }
   };
   
   const fillStarSquares = (array, squareNumber, color, starGap) => {
     for (let i = 1; i <= squareNumber.length; i++) {
-      array.push(<StarSquare key={`${color}${i}`} isColored={squareNumber[i]} color={color} number={starGap * i} breakTime={breakTimes[(i - 1) % breakTimes.length]} onClick={onClickSquare} onStarClick={onClickStarSquare} />);
+      array.push(<StarSquare key={`${color}${i}`} isColored={squareNumber[i - 1]} color={color} number={starGap * i} breakTime={breakTimes[(i - 1) % breakTimes.length]} onClick={onClickSquare} onStarClick={onClickStarSquare} />);
     }
   };
 
