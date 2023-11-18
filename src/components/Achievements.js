@@ -160,7 +160,7 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
           >
             Achievements
           </Typography>
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', padding: '16px', position: 'relative', maxWidth: '34vw', width: '100%', maxHeight: '20vw', overflow: 'auto' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', padding: '16px', position: 'relative', maxWidth: '480px', width: '100%', maxHeight: '20vw', overflow: 'auto' }}>
                 {achievementIcons.map((Icon, index) => (
                     <Tooltip title={<Typography fontSize='16px'>{achievementItems[index].text}</Typography>} arrow>
                         <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '10px' }}>

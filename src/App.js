@@ -1,7 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
-import { Button, Typography, Paper, Grid, Avatar } from '@mui/material';
 import HeartsBar from './components/HeartsBar';
 import CourseDetails from './components/CourseDetails';
 import Popup from './components/Popup';
@@ -22,10 +21,60 @@ function App() {
   const [progressIndex, setProgressIndex] = useState(0);
   const courseName = 'Complexity';
   const tastDate = '28/01/24';
+  const studyData = {};
 
-  const handleClick = () => {
-    alert(`clicked! Lets start`);
+  //---------------------------------------------------------
+
+  // Function to create a unique key for each task
+  const createTaskKey = (taskType, taskNumber) => ({ taskType, taskNumber });
+
+  // Function to initialize task data
+  const initializeTaskData = (numSquares, numStarSquares, taskText) => ({
+    squares: Array(numSquares).fill(false),
+    starSquares: Array(numStarSquares).fill(false),
+    taskText: taskText,
+  });
+
+  const createNewStudy = (settingArray, additionatText) => {
+    let textIndex = 0;
+
+    for (let i = 1; i <= settingArray.length; i++) {
+      const type = settingArray[i].taskType === 'R' ? 'readingTask' : (settingArray[i].taskType === 'S' ? 'solvingTask' : 'additionalTask');
+      const starGap = theme[type][settingArray[i].taskNumber].starGap;
+      const starSquareNumber = Math.floor(settingArray[i].squareNumber / starGap);
+      const text = type === 'additionalTask' ? additionatText[textIndex++]: '';
+
+      const taskKey = createTaskKey(type, `task${settingArray[i].taskNumber}`);
+      const taskData = initializeTaskData(squareNumber, starSquareNumber, text);
+      studyData[taskKey] = taskData;
+    }
   }
+
+  const initializeExampleSettingArray = (taskType, taskNumber, squareNumber) => ({
+    taskType: taskType,
+    taskNumber: taskNumber,
+    squareNumber: squareNumber,
+  });
+
+  const creatExampleStudy = () => {
+    const settingArray = [];
+
+    settingArray.push(initializeExampleSettingArray('R', 1, 8));
+    settingArray.push(initializeExampleSettingArray('R', 2, 12));
+
+    settingArray.push(initializeExampleSettingArray('S', 1, 9));
+    settingArray.push(initializeExampleSettingArray('S', 2, 4));
+    settingArray.push(initializeExampleSettingArray('S', 3, 4));
+
+    settingArray.push(initializeExampleSettingArray('O', 1, 6));
+    settingArray.push(initializeExampleSettingArray('O', 2, 1));
+
+    const additionatText = ['Read 5 sentences', 'Read formula sheet'];
+
+    createNewStudy(settingArray, additionatText);
+  }
+
+  //---------------------------------------------------------
 
   const setTimerPopup = (time, color) => {
     setTimerTime(time);
@@ -56,10 +105,10 @@ function App() {
   };
   
   useEffect(() => {
-    if (uncoloredSquareNumber === 0) {
-      alert("done!");
-      // showPopup
-    }
+    // if (uncoloredSquareNumber === 0) {
+    //   alert("done!");
+    //   // showPopup
+    // }
     updateProgressIndex();
   }, [uncoloredSquareNumber]);
   
