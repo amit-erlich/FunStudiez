@@ -25,16 +25,18 @@ function App() {
 
   //---------------------------------------------------------
 
-  const initializeTaskData = (numSquares, numStarSquares, taskText) => ({
+  const initializeTaskData = (numSquares, numStarSquares, questionsNumber, taskText) => ({
     squares: Array(numSquares).fill(false),
     starSquares: Array(numStarSquares).fill(false),
+    questionsNumber: questionsNumber,
     taskText: taskText,
   });
 
-  const initializeExampleSettingArray = (taskType, taskNumber, squareNumber) => ({
+  const initializeExampleSettingArray = (taskType, taskNumber, squareNumber, questionsNumber) => ({
     taskType: taskType,
     taskNumber: taskNumber,
     squareNumber: squareNumber,
+    questionsNumber: questionsNumber,
   });
 
   const createNewStudy = (settingArray, additionatText) => {
@@ -47,7 +49,7 @@ function App() {
       const text = type === 'additionalTask' ? additionatText[textIndex++]: '';
 
       const taskKey = `${type}_task${settingArray[i].taskNumber}`;
-      const taskData = initializeTaskData(settingArray[i].squareNumber, starSquareNumber, text);
+      const taskData = initializeTaskData(settingArray[i].squareNumber, starSquareNumber, settingArray[i].questionsNumber, text);
       studyData[taskKey] = taskData;
     }
   }
@@ -61,7 +63,7 @@ function App() {
   
       settingArray.push(initializeExampleSettingArray('S', 1, 9));
       settingArray.push(initializeExampleSettingArray('S', 2, 4));
-      settingArray.push(initializeExampleSettingArray('S', 3, 4));
+      settingArray.push(initializeExampleSettingArray('S', 3, 4, 3));
   
       settingArray.push(initializeExampleSettingArray('O', 1, 6));
       settingArray.push(initializeExampleSettingArray('O', 2, 1));

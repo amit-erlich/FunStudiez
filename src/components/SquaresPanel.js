@@ -16,22 +16,11 @@ const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
   const [shuffledTaskSquares, setShuffledTaskSquares] = useState([]);
   const [loading, setLoading] = useState(true);
   const breakTimes = ['5', '10', '15', '20', '25', '30', '40'];
-  console.log('in SquaresPanel');
 
   useEffect(() => {
-    console.log('squaresData changed:', squaresData);
-    console.log('before for-loop in useEffect (SquaresPanel)');
-    console.log(`-->  squaresData.length=${Object.keys(squaresData).length}`);
-
     for (const taskKeyString in squaresData) {
-      console.log('in for-loop');
       if (squaresData.hasOwnProperty(taskKeyString)) {
         const taskData = squaresData[taskKeyString];
-
-        console.log('taskKeyString:', taskKeyString);
-        console.log('Task Squares:', taskData.squares);
-        console.log('Task Star Squares:', taskData.starSquares);
-        console.log('Task Text:', taskData.taskText);
 
         const [taskType, taskNumber] = taskKeyString.split('_');
         const { color, starGap } = theme[taskType][taskNumber];
@@ -40,8 +29,7 @@ const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
           theme[taskType][taskNumber]['text'] = taskData.taskText;
         }
 
-        console.log(`taskType=${taskType}, taskNumber=${taskNumber}, taskData.squares=${taskData.squares}, taskData.starSquares=${taskData.starSquares}`);
-        fillTaskSquares(shuffledTaskSquares, taskType, taskNumber, taskData.squares);
+        fillTaskSquares(shuffledTaskSquares, taskType, taskNumber, taskData.squares, taskData.questionsNumber);
         fillStarSquares(shuffledTaskSquares, taskData.starSquares, theme.palette[color], starGap);
       }
     }
@@ -56,7 +44,7 @@ const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
   }, [loading]);
 
   const fillTaskSquares = (array, taskType, taskNumber, squareNumber, questionNum) => {
-    const isSolveTask3 = (taskType === 'S' && taskNumber === 'task3');
+    const isSolveTask3 = (taskType === 'solvingTask' && taskNumber === 'task3');
   
     for (let i = 1; i <= squareNumber.length; i++) {
       array.push(<TaskSquare key={`${taskType}${taskNumber}${i}`} isColored={squareNumber[i]} taskType={taskType} taskNumber={taskNumber} number={isSolveTask3 ? questionNum : i} onClick={onClickSquare} />);
