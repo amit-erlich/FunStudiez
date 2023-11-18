@@ -28,6 +28,7 @@ const CustomButton = styled(Button)(({ borderColor, bgColor }) => ({
 }));
 
 const Square = ({
+    isColored,
     color,
     isStar,
     text,
@@ -36,7 +37,7 @@ const Square = ({
     onClick,
     onStarClick
 }) => {
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(isColored);
 
   const handleButtonClick = () => {
     setClicked(!clicked);

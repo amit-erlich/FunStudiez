@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Square from './Square';
 
 const StarSquare = ({
+    isColored,
     color,
     number,
     breakTime,
@@ -10,7 +11,7 @@ const StarSquare = ({
 }) => {
 
   return (
-    <Square color={color} isStar={true} number={number} breakTime={breakTime} onClick={onClick} onStarClick={onStarClick} />
+    <Square isColored={isColored} color={color} isStar={true} number={number} breakTime={breakTime} onClick={onClick} onStarClick={onStarClick} />
   );
 };
 

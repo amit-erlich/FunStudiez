@@ -25,10 +25,6 @@ function App() {
 
   //---------------------------------------------------------
 
-  // Function to create a unique key for each task
-  const createTaskKey = (taskType, taskNumber) => ({ taskType, taskNumber });
-
-  // Function to initialize task data
   const initializeTaskData = (numSquares, numStarSquares, taskText) => ({
     squares: Array(numSquares).fill(false),
     starSquares: Array(numStarSquares).fill(false),
@@ -50,36 +46,42 @@ function App() {
       const starSquareNumber = Math.floor(settingArray[i].squareNumber / starGap);
       const text = type === 'additionalTask' ? additionatText[textIndex++]: '';
 
-      //const taskKey = createTaskKey(type, `task${settingArray[i].taskNumber}`);
       const taskKey = `${type}_task${settingArray[i].taskNumber}`;
       const taskData = initializeTaskData(settingArray[i].squareNumber, starSquareNumber, text);
       studyData[taskKey] = taskData;
     }
   }
 
-  
-
   useEffect(() => {
     const creatExampleStudy = () => {
       const settingArray = [];
   
-      settingArray.push(initializeExampleSettingArray('R', 1, 8));
-      settingArray.push(initializeExampleSettingArray('R', 2, 12));
+      //settingArray.push(initializeExampleSettingArray('R', 1, 8));
+      //settingArray.push(initializeExampleSettingArray('R', 2, 12));
   
       settingArray.push(initializeExampleSettingArray('S', 1, 9));
-      settingArray.push(initializeExampleSettingArray('S', 2, 4));
-      settingArray.push(initializeExampleSettingArray('S', 3, 4));
+      //settingArray.push(initializeExampleSettingArray('S', 2, 4));
+      //settingArray.push(initializeExampleSettingArray('S', 3, 4));
   
-      settingArray.push(initializeExampleSettingArray('O', 1, 6));
-      settingArray.push(initializeExampleSettingArray('O', 2, 1));
+      //settingArray.push(initializeExampleSettingArray('O', 1, 6));
+      //settingArray.push(initializeExampleSettingArray('O', 2, 1));
   
       const additionatText = ['Read 5 sentences', 'Read formula sheet'];
   
       createNewStudy(settingArray, additionatText);
-      updateUncoloredSquareNumber(8 + 12 + 9 + 4 + 4 + 6 + 1);
+      //updateUncoloredSquareNumber(8 + 12 + 9 + 4 + 4 + 6 + 1);
+      updateUncoloredSquareNumber(9);
+
+
+      console.log(`-->  in App.js, studyData.length=${Object.keys(studyData).length}`);
+      for (const taskKeyString in studyData) {
+        if (studyData.hasOwnProperty(taskKeyString)) {
+          const taskData = studyData[taskKeyString];
+          console.log('in for-loop');
+        }
+      }
     }
-    
-    console.log('------------------- calling creatExampleStudy');
+    console.log('------------------- creatExampleStudy calling');
     creatExampleStudy();
     console.log('------------------- creatExampleStudy end');
   }, [theme]);
@@ -115,26 +117,17 @@ function App() {
   };
   
   useEffect(() => {
-    // if (uncoloredSquareNumber === 0) {
-    //   alert("done!");
-    //   // showPopup
-    // }
+    const updateProgressIndex = () => {
+      const tenOfSquareNumber = Math.ceil((squareNumber - 1) / 9);
+  
+      if (squareNumber - uncoloredSquareNumber === tenOfSquareNumber * progressIndex + 1) {
+        setProgressIndex((prevIndex) => ((prevIndex < 8) ? prevIndex + 1 : prevIndex));
+      } else if (uncoloredSquareNumber === 0) {
+        setProgressIndex((prevIndex) => (prevIndex + 1));
+      } 
+    };
     updateProgressIndex();
   }, [uncoloredSquareNumber]);
-  
-  const updateProgressIndex = () => {
-    const tenOfSquareNumber = Math.ceil((squareNumber - 1) / 9);
-
-    if (squareNumber - uncoloredSquareNumber === tenOfSquareNumber * progressIndex + 1) {
-      setProgressIndex((prevIndex) => ((prevIndex < 8) ? prevIndex + 1 : prevIndex));
-    } else if (uncoloredSquareNumber === 0) {
-      setProgressIndex((prevIndex) => (prevIndex + 1));
-    } 
-  };
-
-  
-
-  //console.log(`in App.js, studyData.length=${Object.keys(studyData).length}`);
 
   return (
     <div className="App">
@@ -160,7 +153,7 @@ function App() {
           <ProgressAvatar index={progressIndex} wholeNumber={squareNumber} />
         </div>
         <div style={{ position: 'absolute', top: '30%', maxWidth: '90vw', width: 'fit-content', maxHeight: '30vw', overflow: 'auto'}}>
-          <SquaresPanel squaresData={studyData} updateSquareNumber={updateUncoloredSquareNumber} onClickSquare={increaseOrDecreaseSquareNumber} onClickStarSquare={handleStarSquareClicked} />
+          <SquaresPanel squaresData={studyData} onClickSquare={increaseOrDecreaseSquareNumber} onClickStarSquare={handleStarSquareClicked} />
         </div>
       </header>
     </div>

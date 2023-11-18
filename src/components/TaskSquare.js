@@ -3,24 +3,36 @@ import Square from './Square';
 import theme from '../theme';
 
 const TaskSquare = ({
+    isColored,
     taskType,
     taskNumber,
     number,
     onClick
 }) => {
+    // const typy = taskType === 'R' ? 'readingTask' : (taskType === 'S' ? 'solvingTask' : 'additionalTask');
+    // const { text, color } = theme[typy][taskNumber];
+    // const squareText = 
+    //     (taskType === 'R' ? 
+    //         `Read ${text} no.${number}` :
+    //         (taskType != 'S' ? 
+    //             text :
+    //             (taskNumber === 'task3' ? 
+    //                 `Solve ${number} test questions` : 
+    //                 `Solve ${text} no.${number}`)));
+
     const typy = taskType === 'R' ? 'readingTask' : (taskType === 'S' ? 'solvingTask' : 'additionalTask');
-    const { text, color } = theme[typy][taskNumber];
+    const { text, color } = theme[taskType][taskNumber];
     const squareText = 
-        (taskType === 'R' ? 
+        (taskType === 'readingTask' ? 
             `Read ${text} no.${number}` :
-            (taskType != 'S' ? 
+            (taskType != 'solvingTask' ? 
                 text :
                 (taskNumber === 'task3' ? 
                     `Solve ${number} test questions` : 
                     `Solve ${text} no.${number}`)));
 
   return (
-    <Square color={theme.palette[color]} text={squareText} onClick={onClick} />
+    <Square isColored={isColored} color={theme.palette[color]} text={squareText} onClick={onClick} />
   );
 };
 
