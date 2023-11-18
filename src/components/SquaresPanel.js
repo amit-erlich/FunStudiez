@@ -29,8 +29,8 @@ const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
           theme[taskType][taskNumber]['text'] = taskData.taskText;
         }
 
-        fillTaskSquares(shuffledTaskSquares, taskType, taskNumber, taskData.squares, taskData.questionsNumber);
-        fillStarSquares(shuffledTaskSquares, taskData.starSquares, theme.palette[color], starGap);
+        fillTaskSquares(shuffledTaskSquares, taskType, taskNumber, taskData.squares, taskData.questionsNumber, taskKeyString);
+        fillStarSquares(shuffledTaskSquares, taskData.starSquares, theme.palette[color], starGap, taskKeyString);
       }
     }
     setLoading(false);
@@ -43,17 +43,17 @@ const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
     }
   }, [loading]);
 
-  const fillTaskSquares = (array, taskType, taskNumber, squareNumber, questionNum) => {
+  const fillTaskSquares = (array, taskType, taskNumber, squareNumber, questionNum, taskKey) => {
     const isSolveTask3 = (taskType === 'solvingTask' && taskNumber === 'task3');
   
     for (let i = 1; i <= squareNumber.length; i++) {
-      array.push(<TaskSquare key={`${taskType}${taskNumber}${i}`} isColored={squareNumber[i - 1]} taskType={taskType} taskNumber={taskNumber} number={isSolveTask3 ? questionNum : i} onClick={onClickSquare} />);
+      array.push(<TaskSquare key={`${taskType}${taskNumber}${i}`} isColored={squareNumber[i - 1]} taskType={taskType} taskNumber={taskNumber} number={isSolveTask3 ? questionNum : i} taskKey={taskKey} squareIndex={i} onClick={onClickSquare} />);
     }
   };
   
-  const fillStarSquares = (array, squareNumber, color, starGap) => {
+  const fillStarSquares = (array, squareNumber, color, starGap, taskKey) => {
     for (let i = 1; i <= squareNumber.length; i++) {
-      array.push(<StarSquare key={`${color}${i}`} isColored={squareNumber[i - 1]} color={color} number={starGap * i} breakTime={breakTimes[(i - 1) % breakTimes.length]} onClick={onClickSquare} onStarClick={onClickStarSquare} />);
+      array.push(<StarSquare key={`${color}${i}`} isColored={squareNumber[i - 1]} color={color} number={starGap * i} breakTime={breakTimes[(i - 1) % breakTimes.length]} taskKey={taskKey} squareIndex={i} onClick={onClickSquare} onStarClick={onClickStarSquare} />);
     }
   };
 

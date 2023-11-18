@@ -34,6 +34,8 @@ const Square = ({
     text,
     number,
     breakTime,
+    taskKey,
+    squareIndex,
     onClick,
     onStarClick
 }) => {
@@ -41,7 +43,7 @@ const Square = ({
 
   const handleButtonClick = () => {
     setClicked(!clicked);
-    onClick(clicked);
+    onClick(clicked, taskKey, squareIndex, isStar);
     if (isStar && !clicked) {
       onStarClick(breakTime, color);
     }

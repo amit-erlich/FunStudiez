@@ -106,8 +106,15 @@ function App() {
     }
   };
 
-  const increaseOrDecreaseSquareNumber = (toIncrease) => {
+  const increaseOrDecreaseSquareNumber = (toIncrease, taskKey, squareIndex, isStar) => {
     setUncoloredSquareNumber(prevSquareNumber => prevSquareNumber + (toIncrease ? 1 : -1));
+
+    const taskData = studyData[taskKey];
+    if (isStar) { 
+      taskData.starSquares[squareIndex] = !taskData.starSquares[squareIndex];
+    } else {
+      taskData.squares[squareIndex] = !taskData.squares[squareIndex];
+    }
   };
   
   useEffect(() => {
