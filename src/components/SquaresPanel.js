@@ -14,42 +14,9 @@ const shuffleArray = (array) => {
 const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
   const theme = useTheme();
   const [shuffledTaskSquares, setShuffledTaskSquares] = useState([]);
-  const [loading, setLoading] = useState(true); // Added loading state
-  const taskSquares = [];
+  const [loading, setLoading] = useState(true);
   const breakTimes = ['5', '10', '15', '20', '25', '30', '40'];
   console.log('in SquaresPanel');
-
-  // useEffect(() => {
-  //   console.log('squaresData changed:', squaresData);
-  //   console.log('before for-loop in useEffect (SquaresPanel)');
-  //   console.log(`-->  squaresData.length=${Object.keys(squaresData).length}`);
-  //   for (const taskKeyString in squaresData) {
-  //     console.log('in for-loop');
-  //     if (squaresData.hasOwnProperty(taskKeyString)) {
-  //       const taskData = squaresData[taskKeyString];
-        
-  //       console.log('taskKeyString:', taskKeyString);
-  //       console.log('Task Squares:', taskData.squares);
-  //       console.log('Task Star Squares:', taskData.starSquares);
-  //       console.log('Task Text:', taskData.taskText);
-
-  //       const [taskType, taskNumber] = taskKeyString.split('_');
-  //       const { color, starGap } = theme[taskType][taskNumber];
-
-  //       if (taskType === 'additionalTask') {
-  //         theme[taskType][taskNumber]['text'] = taskData.taskText;
-  //       }
-
-  //       console.log(`taskType=${taskType}, taskNumber=${taskNumber}, taskData.squares=${taskData.squares}, taskData.starSquares=${taskData.starSquares}`);
-  //       fillTaskSquares(taskSquares, taskType, taskNumber, taskData.squares);
-  //       fillStarSquares(taskSquares, taskData.starSquares, theme.palette[color], starGap);
-  //     }
-  //   }
-
-  //   const shuffledSquares = shuffleArray([...taskSquares]);
-  //   setShuffledTaskSquares(shuffledSquares);
-
-  // }, [squaresData]);
 
   useEffect(() => {
     console.log('squaresData changed:', squaresData);
@@ -78,10 +45,8 @@ const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
         fillStarSquares(shuffledTaskSquares, taskData.starSquares, theme.palette[color], starGap);
       }
     }
-
-    setLoading(false); // Set loading to false when data is processed
-
-  }, [squaresData, theme]); // Include squaresData and theme as dependencies
+    setLoading(false);
+  }, [squaresData, theme]);
 
   useEffect(() => {
     if (!loading) { // Check if data is ready
@@ -106,8 +71,6 @@ const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
 
   return (
     <div>
-      {/* { (Object.keys(squaresData).length === 0) && <div>No data yet</div> }
-        {shuffledTaskSquares.map((taskSquare) => taskSquare)} */}
         {loading ? <div>Loading...</div> : shuffledTaskSquares.map((taskSquare) => taskSquare)}
     </div>
   );

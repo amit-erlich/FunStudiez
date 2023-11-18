@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/system';
 import { Button, Typography } from '@mui/material';
-import StarIcon from '@mui/icons-material/StarRounded'; //StarRateRounded
+import StarIcon from '@mui/icons-material/StarRounded';
 
 const CustomButton = styled(Button)(({ borderColor, bgColor }) => ({
   width: '140px',

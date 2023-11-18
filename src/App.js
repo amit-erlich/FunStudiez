@@ -56,34 +56,22 @@ function App() {
     const creatExampleStudy = () => {
       const settingArray = [];
   
-      //settingArray.push(initializeExampleSettingArray('R', 1, 8));
-      //settingArray.push(initializeExampleSettingArray('R', 2, 12));
+      settingArray.push(initializeExampleSettingArray('R', 1, 8));
+      settingArray.push(initializeExampleSettingArray('R', 2, 12));
   
       settingArray.push(initializeExampleSettingArray('S', 1, 9));
-      //settingArray.push(initializeExampleSettingArray('S', 2, 4));
-      //settingArray.push(initializeExampleSettingArray('S', 3, 4));
+      settingArray.push(initializeExampleSettingArray('S', 2, 4));
+      settingArray.push(initializeExampleSettingArray('S', 3, 4));
   
-      //settingArray.push(initializeExampleSettingArray('O', 1, 6));
-      //settingArray.push(initializeExampleSettingArray('O', 2, 1));
+      settingArray.push(initializeExampleSettingArray('O', 1, 6));
+      settingArray.push(initializeExampleSettingArray('O', 2, 1));
   
       const additionatText = ['Read 5 sentences', 'Read formula sheet'];
   
       createNewStudy(settingArray, additionatText);
-      //updateUncoloredSquareNumber(8 + 12 + 9 + 4 + 4 + 6 + 1);
-      updateUncoloredSquareNumber(9);
-
-
-      console.log(`-->  in App.js, studyData.length=${Object.keys(studyData).length}`);
-      for (const taskKeyString in studyData) {
-        if (studyData.hasOwnProperty(taskKeyString)) {
-          const taskData = studyData[taskKeyString];
-          console.log('in for-loop');
-        }
-      }
+      updateUncoloredSquareNumber(8 + 12 + 9 + 4 + 4 + 6 + 1);
     }
-    console.log('------------------- creatExampleStudy calling');
     creatExampleStudy();
-    console.log('------------------- creatExampleStudy end');
   }, [theme]);
 
   //---------------------------------------------------------

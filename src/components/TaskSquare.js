@@ -9,17 +9,6 @@ const TaskSquare = ({
     number,
     onClick
 }) => {
-    // const typy = taskType === 'R' ? 'readingTask' : (taskType === 'S' ? 'solvingTask' : 'additionalTask');
-    // const { text, color } = theme[typy][taskNumber];
-    // const squareText = 
-    //     (taskType === 'R' ? 
-    //         `Read ${text} no.${number}` :
-    //         (taskType != 'S' ? 
-    //             text :
-    //             (taskNumber === 'task3' ? 
-    //                 `Solve ${number} test questions` : 
-    //                 `Solve ${text} no.${number}`)));
-
     const typy = taskType === 'R' ? 'readingTask' : (taskType === 'S' ? 'solvingTask' : 'additionalTask');
     const { text, color } = theme[taskType][taskNumber];
     const squareText = 
