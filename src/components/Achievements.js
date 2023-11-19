@@ -60,27 +60,37 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
     CelebrationRoundedIcon,
   ];
   
-  const Achievements = ({ currentColoredSquares, squareNumber }) => {
+  const Achievements = ({ 
+    currentColoredSquares, 
+    squareNumber,
+    isFirstStarColored,
+    isAllStarsInColor,
+    isAllStarsColored,
+    isAllTasksInColor,
+    isUncolored,
+    is2ColorsColored,
+    isAllColorsColored,
+  }) => {
     const theme = useTheme();
     const [anchorEl, setAnchorEl] = useState(null);
     
     const achievementItems = [
-        { condition: currentColoredSquares >= 0, text: 'starting new study' },
-        { condition: currentColoredSquares >= 1, text: 'first square colored' },
+        { condition: currentColoredSquares >= 0, text: 'Starting new study' },
+        { condition: currentColoredSquares >= 1, text: 'First square colored' },
         { condition: currentColoredSquares >= 5, text: '5 colored squares' },
         { condition: currentColoredSquares >= 10, text: '10 colored squares' },
-        { condition: currentColoredSquares >= 12, text: 'first star colored' },
-        { condition: currentColoredSquares >= 14, text: 'all stars in color' },
-        { condition: currentColoredSquares >= 16, text: 'all stars' },
-        { condition: currentColoredSquares >= 18, text: 'all tasks in color' },
-        { condition: currentColoredSquares >= 20, text: 'uncolored' },
-        { condition: currentColoredSquares >= 22, text: 'two different colors' },
-        { condition: currentColoredSquares >= 25, text: 'colored each color' },
+        { condition: isFirstStarColored, text: 'First star colored' },
+        { condition: isAllStarsInColor, text: 'All stars in color' },
+        { condition: isAllStarsColored, text: 'All stars' },
+        { condition: isAllTasksInColor, text: 'All tasks in color' },
+        { condition: isUncolored, text: 'Uncolored' },
+        { condition: is2ColorsColored, text: 'Two different colors' }, //---------------- 6
+        { condition: isAllColorsColored, text: 'Colored each color' }, //------------------ 7
         { condition: currentColoredSquares >= squareNumber / 4, text: '25% colored' },
         { condition: currentColoredSquares >= squareNumber / 2, text: '50% colored' },
         { condition: currentColoredSquares >= (squareNumber / 4) * 3, text: '75% colored' },
-        { condition: currentColoredSquares + 2 >= squareNumber, text: 'almost finish' },
-        { condition: currentColoredSquares === squareNumber, text: 'all colored' },
+        { condition: currentColoredSquares + 2 >= squareNumber, text: 'Almost finish' },
+        { condition: currentColoredSquares === squareNumber, text: 'All colored' },
       ];
     const [conditions, setConditions] = useState(achievementItems.map(() => false));
     const [newAchievementText, setNewAchievementText] = useState(achievementItems[0].text);
