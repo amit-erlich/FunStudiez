@@ -84,8 +84,8 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
         { condition: isAllStarsColored, text: 'All stars' },
         { condition: isAllTasksInColor, text: 'All tasks in color' },
         { condition: isUncolored, text: 'Uncolored' },
-        { condition: is2ColorsColored, text: 'Two different colors' }, //---------------- 6
-        { condition: isAllColorsColored, text: 'Colored each color' }, //------------------ 7
+        { condition: is2ColorsColored, text: 'Two different colors' },
+        { condition: isAllColorsColored, text: 'Colored each color' },
         { condition: currentColoredSquares >= squareNumber / 4, text: '25% colored' },
         { condition: currentColoredSquares >= squareNumber / 2, text: '50% colored' },
         { condition: currentColoredSquares >= (squareNumber / 4) * 3, text: '75% colored' },
@@ -96,7 +96,7 @@ const CustomButton = styled(IconButton)(({ borderColor }) => ({
     const [newAchievementText, setNewAchievementText] = useState(achievementItems[0].text);
 
     const getIconColor = (currentIndex) => {
-        if (achievementItems[currentIndex].condition && (squareNumber != -1) && !conditions[currentIndex]) {
+        if (achievementItems[currentIndex].condition && (squareNumber !== -1) && !conditions[currentIndex]) {
             setConditions((prevConditions) => {
                 const newConditions = [...prevConditions];
                 newConditions[currentIndex] = true;

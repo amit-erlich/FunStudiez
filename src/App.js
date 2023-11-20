@@ -168,8 +168,6 @@ function App() {
     };
     updateProgressIndex();
 
-    // first-star, AllStarsInColor, AllStars, AllTasksInColor, uncolored, 2-different-colors, colored-each-color
-
   }, [coloredSquareNumber]);
 
   return (
