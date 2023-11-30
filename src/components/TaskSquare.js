@@ -11,7 +11,6 @@ const TaskSquare = ({
     squareIndex,
     onClick
 }) => {
-    const typy = taskType === 'R' ? 'readingTask' : (taskType === 'S' ? 'solvingTask' : 'additionalTask');
     const { text, color } = theme[taskType][taskNumber];
     const squareText = 
         (taskType === 'readingTask' ? 
@@ -23,7 +22,7 @@ const TaskSquare = ({
                     `Solve ${text} no.${number}`)));
 
   return (
-    <Square isColored={isColored} color={theme.palette[color]} text={squareText} taskKey={taskKey} squareIndex={squareIndex} onClick={onClick} />
+    <Square isColored={isColored} color={theme.palette[color]} isStar={false} text={squareText} taskKey={taskKey} squareIndex={squareIndex} onClick={onClick} />
   );
 };
 

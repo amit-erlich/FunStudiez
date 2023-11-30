@@ -46,7 +46,24 @@ const Square = ({
     onClick(clicked, taskKey, squareIndex, isStar);
     if (isStar && !clicked) {
       onStarClick(breakTime, color);
+      //checkCanMarkStar(taskKey, number);
     }
+
+    // setClicked(!clicked);
+    // onClick(clicked, taskKey, squareIndex, isStar);
+    // if (isStar && !clicked && checkCanMarkStar(taskKey, number)) {
+    //   onStarClick(breakTime, color);
+    // }
+
+    // if (isStar && !clicked) {
+    //   onStarClick(taskKey, number, breakTime, color);
+    //   // if (checkCanMarkStar()) {
+        
+    //   // }
+    // } else {
+    //   setClicked(!clicked);
+    //   onClick(clicked, taskKey, squareIndex, isStar);
+    // }
   };
 
   const borderColor = color;

@@ -44,16 +44,40 @@ const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
   }, [loading]);
 
   const fillTaskSquares = (array, taskType, taskNumber, squareNumber, questionNum, taskKey) => {
+    const isReadTask5 = (taskType === 'readingTask' && taskNumber === 'task5');
     const isSolveTask3 = (taskType === 'solvingTask' && taskNumber === 'task3');
   
     for (let i = 1; i <= squareNumber.length; i++) {
-      array.push(<TaskSquare key={`${taskType}${taskNumber}${i}`} isColored={squareNumber[i - 1]} taskType={taskType} taskNumber={taskNumber} number={isSolveTask3 ? questionNum : i} taskKey={taskKey} squareIndex={i - 1} onClick={onClickSquare} />);
+      array.push(
+        <TaskSquare 
+          key={`${taskType}${taskNumber}${i}`} 
+          isColored={squareNumber[i - 1]} 
+          taskType={taskType} 
+          taskNumber={taskNumber} 
+          number={isSolveTask3 ? questionNum : (isReadTask5 ? theme.readingTask.task5.pageGap * i : i)} 
+          taskKey={taskKey} 
+          squareIndex={i - 1} 
+          onClick={onClickSquare} 
+        />
+      );
     }
   };
   
   const fillStarSquares = (array, squareNumber, color, starGap, taskKey) => {
     for (let i = 1; i <= squareNumber.length; i++) {
-      array.push(<StarSquare key={`${color}${i}`} isColored={squareNumber[i - 1]} color={color} number={starGap * i} breakTime={breakTimes[(i - 1) % breakTimes.length]} taskKey={taskKey} squareIndex={i - 1} onClick={onClickSquare} onStarClick={onClickStarSquare} />);
+      array.push(
+        <StarSquare 
+          key={`${color}${i}`} 
+          isColored={squareNumber[i - 1]} 
+          color={color} 
+          number={starGap * i} 
+          breakTime={breakTimes[(i - 1) % breakTimes.length]} 
+          taskKey={taskKey} 
+          squareIndex={i - 1} 
+          onClick={onClickSquare} 
+          onStarClick={onClickStarSquare} 
+        />
+      );
     }
   };
 

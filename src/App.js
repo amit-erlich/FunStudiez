@@ -54,15 +54,17 @@ function App() {
 
     for (let i = 0; i < settingArray.length; i++) {
       const type = settingArray[i].taskType === 'R' ? 'readingTask' : (settingArray[i].taskType === 'S' ? 'solvingTask' : 'additionalTask');
+      const isReadTask5 = (type === 'readingTask' && settingArray[i].taskNumber === 5);
+      const squaresNumber = isReadTask5 ? Math.floor(settingArray[i].squareNumber / theme.readingTask.task5.pageGap) : settingArray[i].squareNumber;
       const {starGap} = theme[type][`task${settingArray[i].taskNumber}`];
-      const starSquareNumber = Math.floor(settingArray[i].squareNumber / starGap);
+      const starSquareNumber = Math.floor(squaresNumber / starGap);
       const text = type === 'additionalTask' ? additionatText[textIndex++]: '';
 
       const taskKey = `${type}_task${settingArray[i].taskNumber}`;
-      const taskData = initializeTaskData(settingArray[i].squareNumber, starSquareNumber, settingArray[i].questionsNumber, text);
+      const taskData = initializeTaskData(squaresNumber, starSquareNumber, settingArray[i].questionsNumber, text);
       studyData[taskKey] = taskData;
 
-      countSquares += settingArray[i].squareNumber + starSquareNumber;
+      countSquares += squaresNumber + starSquareNumber;
     }
 
     setColoredSquareNumber(0);
@@ -73,17 +75,22 @@ function App() {
     const creatExampleStudy = () => {
       const settingArray = [];
   
-      settingArray.push(initializeExampleSettingArray('R', 1, 8));
-      settingArray.push(initializeExampleSettingArray('R', 2, 12));
+      // settingArray.push(initializeExampleSettingArray('R', 1, 8));
+      // settingArray.push(initializeExampleSettingArray('R', 2, 12));
   
-      settingArray.push(initializeExampleSettingArray('S', 1, 9));
-      settingArray.push(initializeExampleSettingArray('S', 2, 4));
-      settingArray.push(initializeExampleSettingArray('S', 3, 4, 3));
+      // settingArray.push(initializeExampleSettingArray('S', 1, 9));
+      // settingArray.push(initializeExampleSettingArray('S', 2, 4));
+      // settingArray.push(initializeExampleSettingArray('S', 3, 4, 3));
   
-      settingArray.push(initializeExampleSettingArray('O', 1, 6));
-      settingArray.push(initializeExampleSettingArray('O', 2, 1));
+      // settingArray.push(initializeExampleSettingArray('O', 1, 6));
+      // settingArray.push(initializeExampleSettingArray('O', 2, 1));
+      
+      settingArray.push(initializeExampleSettingArray('R', 5, 104));
+      settingArray.push(initializeExampleSettingArray('R', 1, 1));
+      settingArray.push(initializeExampleSettingArray('O', 1, 5));
   
-      const additionatText = ['Read 5 sentences', 'Read formula sheet'];
+      //const additionatText = ['Read 5 sentences', 'Read formula sheet'];
+      const additionatText = ['Solve 2 LeetCode questions', 'Read formula sheet'];
   
       createNewStudy(settingArray, additionatText);
     }
@@ -100,6 +107,11 @@ function App() {
 
   const handleStarSquareClicked = (time, color) => {
     // TO-DO: check if can mark star
+    // if (studyData[taskKey].squares.length >= starNumber) {
+    //   setTimerPopup(time, color);
+    // } else {
+    //   alert("can't click");
+    // }
     setTimerPopup(time, color);
   }
 
@@ -167,7 +179,6 @@ function App() {
       } 
     };
     updateProgressIndex();
-
   }, [coloredSquareNumber]);
 
   return (

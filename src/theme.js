@@ -40,7 +40,8 @@ const theme = createTheme({
         task5: {
             text: 'up to page',
             color: 'lightBlue',
-            starGap: 50
+            starGap: 2,
+            pageGap: 5
         },
     },
     solvingTask: {
