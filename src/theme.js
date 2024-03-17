@@ -47,12 +47,12 @@ const theme = createTheme({
     solvingTask: {
         task1: {
             text: 'assignment',
-            color: 'blueGreen',
+            color: 'orange',
             starGap: 1
         },
         task2: {
             text: 'test',
-            color: 'orange',
+            color: 'blueGreen',
             starGap: 1
         },
         task3: {
