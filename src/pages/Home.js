@@ -1,4 +1,3 @@
-//import './App.css';
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import HeartsBar from '../components/HeartsBar';
@@ -75,8 +74,7 @@ function Home() {
     const creatExampleStudy = () => {
       const settingArray = [];
   
-      //settingArray.push(initializeExampleSettingArray('R', 1, 8));
-      // settingArray.push(initializeExampleSettingArray('R', 2, 12));
+      settingArray.push(initializeExampleSettingArray('R', 1, 8));
   
       settingArray.push(initializeExampleSettingArray('S', 1, 9));
       settingArray.push(initializeExampleSettingArray('S', 2, 4));
@@ -84,13 +82,8 @@ function Home() {
   
       settingArray.push(initializeExampleSettingArray('O', 1, 6));
       settingArray.push(initializeExampleSettingArray('O', 2, 1));
-      
-      //settingArray.push(initializeExampleSettingArray('R', 5, 104));
-      //settingArray.push(initializeExampleSettingArray('R', 1, 1));
-      //settingArray.push(initializeExampleSettingArray('O', 1, 5));
   
       const additionatText = ['Read 5 sentences', 'Read formula sheet'];
-      //const additionatText = ['Solve 2 LeetCode questions', 'Read formula sheet'];
   
       createNewStudy(settingArray, additionatText);
     }
