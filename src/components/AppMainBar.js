@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppBar, Box, Toolbar, Typography, IconButton, Drawer, Paper, List, ListItem, ListItemText } from '@mui/material';
 
 import MenuIcon from '@mui/icons-material/Menu';
@@ -13,6 +14,11 @@ function AppMainBar() {
     const backgroundColor = theme.palette.yellow;
     const [drawerOpen, setDrawerOpen] = useState(false);
 
+    const navigate = useNavigate();
+    const navigateHomePage = () => {
+      navigate('/');
+    };
+
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
@@ -22,7 +28,7 @@ function AppMainBar() {
     };
 
     const menuItems = [
-        { icon: <HomeRoundedIcon style={{ fontSize: '2rem', paddingRight: '10px' }}/>, text: 'Home', onClick: () => console.log('Home clicked') },
+        { icon: <HomeRoundedIcon style={{ fontSize: '2rem', paddingRight: '10px' }}/>, text: 'Home', onClick: () => navigateHomePage() },
         { icon: <NoteAddRoundedIcon style={{ fontSize: '2rem', paddingRight: '10px' }}/>, text: 'New Study', onClick: () => console.log('New Study clicked') },
         { icon: <DescriptionRoundedIcon style={{ fontSize: '2rem', paddingRight: '10px' }}/>, text: 'Previous Studies', onClick: () => console.log('Previous Studies clicked') },
     ];

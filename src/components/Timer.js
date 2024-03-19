@@ -23,7 +23,7 @@ const Timer = ({ initialTime, onTimerEnd, color }) => {
 
   const startTimer = () => {
     setIsRunning(true);
-    setButtonText('Stop');
+    setButtonText('Pause');
   };
 
   const resetTimer = () => {
