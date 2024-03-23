@@ -18,6 +18,9 @@ function AppMainBar() {
     const navigateHomePage = () => {
       navigate('/');
     };
+    const navigateNewStudyPage = () => {
+        navigate('/NewStudySettings');
+      };
 
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -29,7 +32,7 @@ function AppMainBar() {
 
     const menuItems = [
         { icon: <HomeRoundedIcon style={{ fontSize: '2rem', paddingRight: '10px' }}/>, text: 'Home', onClick: () => navigateHomePage() },
-        { icon: <NoteAddRoundedIcon style={{ fontSize: '2rem', paddingRight: '10px' }}/>, text: 'New Study', onClick: () => console.log('New Study clicked') },
+        { icon: <NoteAddRoundedIcon style={{ fontSize: '2rem', paddingRight: '10px' }}/>, text: 'New Study', onClick: () => navigateNewStudyPage() },
         { icon: <DescriptionRoundedIcon style={{ fontSize: '2rem', paddingRight: '10px' }}/>, text: 'Previous Studies', onClick: () => console.log('Previous Studies clicked') },
     ];
     

@@ -8,7 +8,7 @@ function Home() {
   
   const navigate = useNavigate();
   const navigateNewStudy = () => {
-      navigate('/Study');
+      navigate('/NewStudySettings');
   };
 
   return (
