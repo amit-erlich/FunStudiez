@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import { Button, Container, Stepper, Step, Box, StepLabel } from '@mui/material';
+import { Button, Container, Stepper, Step, Box, StepLabel, TextField } from '@mui/material';
 import AppMainBar from '../components/AppMainBar';
 
 function NewStudySettings() {
@@ -55,13 +55,25 @@ function NewStudySettings() {
             <Box sx={{ width: '100%' }} style={{ position: 'absolute', top: '30%'}}>
                 <Stepper activeStep={currentStep} alternativeLabel>
                     {steps.map((label) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
+                    <Step key={label}
+                    sx={{
+                        '& .MuiStepLabel-root .Mui-completed': {
+                          color: theme.palette.green, // circle color (COMPLETED)
+                        },
+                        '& .MuiStepLabel-root .Mui-active': {
+                          color: theme.palette.green, // circle color (ACTIVE)
+                        },
+                        '& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel':
+                          {
+                            color: theme.palette.green, // Just text label (ACTIVE)
+                          },
+                      }}>
+                        <StepLabel></StepLabel>
                     </Step>
                     ))}
                 </Stepper>
             </Box>
-            <div style={{ position: 'absolute', top: '45%'}}>
+            <div style={{ position: 'absolute', top: '40%'}}>
                 <div>
                     <p style={{ fontSize: '150%', fontWeight: 'bold', padding: '0px', margin: '0px' }}>
                     {settingsTitle}
@@ -72,9 +84,30 @@ function NewStudySettings() {
                 </div>
                 <div>
                     {(currentStep == 0) &&
-                    <p style={{ fontSize: '110%', padding: '0px', margin: '0px' }}>
-                    stage 1
-                    </p>
+                    <div>
+                        <p style={{ fontSize: '110%' }}>
+                        Course name:
+                        <TextField
+                            required
+                            id="outlined-required"
+                            label="Required"
+                            defaultValue=""
+                            size="small"
+                            style={{ marginLeft: '10px' }}
+                        />
+                        </p>
+                        <p style={{ fontSize: '110%' }}>
+                        Test date:
+                        <TextField
+                            required
+                            id="outlined-required"
+                            label="Required"
+                            defaultValue=""
+                            size="small"
+                            style={{ marginLeft: '10px' }}
+                        />
+                        </p>
+                    </div>
                     }
                     {(currentStep == 1) &&
                     <p style={{ fontSize: '110%', padding: '0px', margin: '0px' }}>
