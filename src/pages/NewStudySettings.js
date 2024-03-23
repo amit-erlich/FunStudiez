@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import { Button, Container, Stepper } from '@mui/material';
+import { Button, Container, Stepper, Step, Box, StepLabel } from '@mui/material';
 import AppMainBar from '../components/AppMainBar';
 
 function NewStudySettings() {
     const theme = useTheme();
 
-    const titles = [
+    const steps = [
         "Course details",
         "Reading tasks",
         "Solving tasks",
@@ -20,8 +20,8 @@ function NewStudySettings() {
         "You can add more tasks if you want"
     ];
 
-    const [currentStage, setCurrentStage] = useState(0);
-    const [settingsTitle, setSettingsTitle] = useState(titles[0]);
+    const [currentStep, setCurrentStep] = useState(0);
+    const [settingsTitle, setSettingsTitle] = useState(steps[0]);
     const [settingsInstruction, setSettingsInstruction] = useState(instructions[0]);
     
     const navigate = useNavigate();
@@ -29,17 +29,17 @@ function NewStudySettings() {
         navigate('/Study');
     };
     const stepBack = () => {
-        setCurrentStage(currentStage - 1);
-        setSettingsTitle(titles[currentStage - 1]);
-        setSettingsInstruction(instructions[currentStage - 1]);
+        setCurrentStep(currentStep - 1);
+        setSettingsTitle(steps[currentStep - 1]);
+        setSettingsInstruction(instructions[currentStep - 1]);
     };
     const NextStep = () => {
-        if (currentStage + 1 == 4) {
+        if (currentStep + 1 == 4) {
             navigateStudy();
         } else {
-            setCurrentStage(currentStage + 1);
-            setSettingsTitle(titles[currentStage + 1]);
-            setSettingsInstruction(instructions[currentStage + 1]);
+            setCurrentStep(currentStep + 1);
+            setSettingsTitle(steps[currentStep + 1]);
+            setSettingsInstruction(instructions[currentStep + 1]);
         }
     };
 
@@ -47,41 +47,54 @@ function NewStudySettings() {
     <div className="App">
         <header className="App-header">
             <AppMainBar/>
-            <p style={{ textAlign: 'left', fontSize: '300%', fontWeight: 'bold', padding: '0px', margin: '0px' }}>
-            Set your new study goals
-            </p>
-            <Stepper></Stepper>
-            <div>
-                <p style={{ textAlign: 'left', fontSize: '150%', fontWeight: 'bold', padding: '0px', margin: '0px' }}>
-                {settingsTitle}
-                </p>
-                <p style={{ textAlign: 'left', fontSize: '110%', padding: '0px', margin: '0px' }}>
-                {settingsInstruction}
+            <div style={{ position: 'absolute', top: '5%' }}>
+                <p style={{ fontSize: '200%', fontWeight: 'bold' }}>
+                Set your new study goals
                 </p>
             </div>
-            <div>
-                {(currentStage == 0) &&
-                <p style={{ textAlign: 'left', fontSize: '110%', padding: '0px', margin: '0px' }}>
-                stage 1
-                </p>
-                }
-                {(currentStage == 1) &&
-                <p style={{ textAlign: 'left', fontSize: '110%', padding: '0px', margin: '0px' }}>
-                stage 2
-                </p>
-                }
-                {(currentStage == 2) &&
-                <p style={{ textAlign: 'left', fontSize: '110%', padding: '0px', margin: '0px' }}>
-                stage 3
-                </p>
-                }
-                {(currentStage == 3) &&
-                <p style={{ textAlign: 'left', fontSize: '110%', padding: '0px', margin: '0px' }}>
-                stage 4
-                </p>
-                }
+            <Box sx={{ width: '100%' }} style={{ position: 'absolute', top: '30%'}}>
+                <Stepper activeStep={currentStep} alternativeLabel>
+                    {steps.map((label) => (
+                    <Step key={label}>
+                        <StepLabel>{label}</StepLabel>
+                    </Step>
+                    ))}
+                </Stepper>
+            </Box>
+            <div style={{ position: 'absolute', top: '45%'}}>
+                <div>
+                    <p style={{ fontSize: '150%', fontWeight: 'bold', padding: '0px', margin: '0px' }}>
+                    {settingsTitle}
+                    </p>
+                    <p style={{ fontSize: '110%', padding: '0px', margin: '0px' }}>
+                    {settingsInstruction}
+                    </p>
+                </div>
+                <div>
+                    {(currentStep == 0) &&
+                    <p style={{ fontSize: '110%', padding: '0px', margin: '0px' }}>
+                    stage 1
+                    </p>
+                    }
+                    {(currentStep == 1) &&
+                    <p style={{ fontSize: '110%', padding: '0px', margin: '0px' }}>
+                    stage 2
+                    </p>
+                    }
+                    {(currentStep == 2) &&
+                    <p style={{ fontSize: '110%', padding: '0px', margin: '0px' }}>
+                    stage 3
+                    </p>
+                    }
+                    {(currentStep == 3) &&
+                    <p style={{ fontSize: '110%', padding: '0px', margin: '0px' }}>
+                    stage 4
+                    </p>
+                    }
+                </div>
             </div>
             <Container style={{ padding: '2%' }}>
+                {(currentStep != 0) &&
                 <Button variant="contained" 
                     style={{ 
                     backgroundColor: theme.palette.white, 
@@ -92,7 +105,7 @@ function NewStudySettings() {
                     marginRight: '1%' }}
                     onClick={stepBack}>
                     Back
-                </Button>
+                </Button>}
                 <Button variant="contained" 
                     style={{ 
                     backgroundColor: theme.palette.white, 
@@ -102,7 +115,7 @@ function NewStudySettings() {
                     fontFamily: 'cursive',
                     marginLeft: '1%' }}
                     onClick={NextStep}>
-                    Next
+                    {currentStep == 3 ? 'Let’s start! ': 'Next'}
                 </Button>
             </Container>
         </header>
