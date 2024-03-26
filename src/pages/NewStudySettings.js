@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import { Button, Container, Stepper, Step, Box, StepLabel, TextField } from '@mui/material';
+import { Button, Container, Stepper, Step, Box, StepLabel, TextField, Grid } from '@mui/material';
 import AppMainBar from '../components/AppMainBar';
 
 function NewStudySettings() {
@@ -14,7 +14,7 @@ function NewStudySettings() {
         "Additional tasks"
         ];
     const instructions = [
-        "",
+        "Please fill the following details",
         "How many of the following would you like to read?",
         "How many of the following would you like to solve?",
         "You can add more tasks if you want"
@@ -23,6 +23,84 @@ function NewStudySettings() {
     const [currentStep, setCurrentStep] = useState(0);
     const [settingsTitle, setSettingsTitle] = useState(steps[0]);
     const [settingsInstruction, setSettingsInstruction] = useState(instructions[0]);
+
+    // State to hold the values of input fields
+    const [courseName, setCourseName] = useState('');
+    const [testDate, setTestDate] = useState('');
+
+    const [presentationsNumber, setPresentationsNumber] = useState('');
+    const [notebooksNumber, setNotebooksNumber] = useState('');
+    const [assignmentsNumberR, setAssignmentsNumberR] = useState('');
+    const [pagesNumber, setPagesNumber] = useState('');
+
+    const [assignmentsNumberS, setAssignmentsNumberS] = useState('');
+    const [testsNumber, setTestsNumber] = useState('');
+    const [questionsNumber, setQuestionsNumber] = useState('');
+
+    const [additionalTask1Name, setAdditionalTask1Name] = useState('');
+    const [additionalTask1Number, setAdditionalTask1Number] = useState('');
+    const [additionalTask2Name, setAdditionalTask2Name] = useState('');
+    const [additionalTask2Number, setAdditionalTask2Number] = useState('');
+    const [additionalTask3Name, setAdditionalTask3Name] = useState('');
+    const [additionalTask3Number, setAdditionalTask3Number] = useState('');
+    const [additionalTask4Name, setAdditionalTask4Name] = useState('');
+    const [additionalTask4Number, setAdditionalTask4Number] = useState('');
+
+    // Event handlers to update state when input values change
+    const handleCourseNameChange = (event) => {
+        setCourseName(event.target.value);
+    };
+    const handleTestDateChange = (event) => {
+        setTestDate(event.target.value);
+    };
+
+    const handlePresentationsNumberChange = (event) => {
+        setPresentationsNumber(event.target.value);
+    };
+    const handleNotebooksNumberChange = (event) => {
+        setNotebooksNumber(event.target.value);
+    };
+    const handleAssignmentsNumberRChange = (event) => {
+        setAssignmentsNumberR(event.target.value);
+    };
+    const handlePagesNumberChange = (event) => {
+        setPagesNumber(event.target.value);
+    };
+
+    const handleAssignmentsNumberSChange = (event) => {
+        setAssignmentsNumberS(event.target.value);
+    };
+    const handleTestsNumberChange = (event) => {
+        setTestsNumber(event.target.value);
+    };
+    const handleQuestionsNumberChange = (event) => {
+        setQuestionsNumber(event.target.value);
+    };
+    
+    const handleAdditionalTask1NameChange = (event) => {
+        setAdditionalTask1Name(event.target.value);
+    };
+    const handleAdditionalTask1NumberChange = (event) => {
+        setAdditionalTask1Number(event.target.value);
+    };
+    const handleAdditionalTask2NameChange = (event) => {
+        setAdditionalTask2Name(event.target.value);
+    };
+    const handleAdditionalTask2NumberChange = (event) => {
+        setAdditionalTask2Number(event.target.value);
+    };
+    const handleAdditionalTask3NameChange = (event) => {
+        setAdditionalTask3Name(event.target.value);
+    };
+    const handleAdditionalTask3NumberChange = (event) => {
+        setAdditionalTask3Number(event.target.value);
+    };
+    const handleAdditionalTask4NameChange = (event) => {
+        setAdditionalTask4Name(event.target.value);
+    };
+    const handleAdditionalTask4NumberChange = (event) => {
+        setAdditionalTask4Number(event.target.value);
+    };
     
     const navigate = useNavigate();
     const navigateStudy = () => {
@@ -52,7 +130,7 @@ function NewStudySettings() {
                 Set your new study goals
                 </p>
             </div>
-            <Box sx={{ width: '100%' }} style={{ position: 'absolute', top: '30%'}}>
+            <Box sx={{ width: '100%' }} style={{ position: 'absolute', top: '26%'}}>
                 <Stepper activeStep={currentStep} alternativeLabel>
                     {steps.map((label) => (
                     <Step key={label}
@@ -73,59 +151,193 @@ function NewStudySettings() {
                     ))}
                 </Stepper>
             </Box>
-            <div style={{ position: 'absolute', top: '40%'}}>
-                <div>
+            <Container maxWidth="md" style={{ position: 'absolute', top: '34%' }}>
+                <Grid item xs={12}>
                     <p style={{ fontSize: '150%', fontWeight: 'bold', padding: '0px', margin: '0px' }}>
                     {settingsTitle}
                     </p>
-                    <p style={{ fontSize: '110%', padding: '0px', margin: '0px' }}>
+                    <p style={{ fontSize: '110%', paddingBottom: '5%', margin: '0px' }}>
                     {settingsInstruction}
                     </p>
-                </div>
-                <div>
-                    {(currentStep == 0) &&
-                    <div>
-                        <p style={{ fontSize: '110%' }}>
-                        Course name:
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Required"
-                            defaultValue=""
-                            size="small"
-                            style={{ marginLeft: '10px' }}
-                        />
-                        </p>
-                        <p style={{ fontSize: '110%' }}>
-                        Test date:
-                        <TextField
-                            required
-                            id="outlined-required"
-                            label="Required"
-                            defaultValue=""
-                            size="small"
-                            style={{ marginLeft: '10px' }}
-                        />
-                        </p>
-                    </div>
-                    }
-                    {(currentStep == 1) &&
-                    <p style={{ fontSize: '110%', padding: '0px', margin: '0px' }}>
-                    stage 2
-                    </p>
-                    }
-                    {(currentStep == 2) &&
-                    <p style={{ fontSize: '110%', padding: '0px', margin: '0px' }}>
-                    stage 3
-                    </p>
-                    }
-                    {(currentStep == 3) &&
-                    <p style={{ fontSize: '110%', padding: '0px', margin: '0px' }}>
-                    stage 4
-                    </p>
-                    }
-                </div>
-            </div>
+                </Grid>
+                {(currentStep == 0) &&
+                    <Grid container spacing={2} justifyContent="center">
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                style={{ width: '50%' }}
+                                label="Course name"
+                                value={courseName}
+                                onChange={handleCourseNameChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                style={{ width: '50%' }}
+                                label="Test date"
+                                type="date"
+                                value={testDate}
+                                onChange={handleTestDateChange}
+                                InputLabelProps={{ shrink: true }}
+                            />
+                        </Grid>
+                    </Grid>
+                }
+                {(currentStep == 1) &&
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <TextField
+                                label="Number of Presentations"
+                                type='number'
+                                value={presentationsNumber}
+                                onChange={handlePresentationsNumberChange}
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                label="Number of Notebooks"
+                                type='number'
+                                value={notebooksNumber}
+                                onChange={handleNotebooksNumberChange}
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                label="Number of Assignments"
+                                type='number'
+                                value={assignmentsNumberR}
+                                onChange={handleAssignmentsNumberRChange}
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                label="Number of Pages in Book"
+                                type='number'
+                                value={pagesNumber}
+                                onChange={handlePagesNumberChange}
+                                size="small"
+                            />
+                        </Grid>
+                    </Grid>
+                }
+                {(currentStep == 2) &&
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <TextField
+                                label="Number of Assignments"
+                                type='number'
+                                value={assignmentsNumberS}
+                                onChange={handleAssignmentsNumberSChange}
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                
+                                label="Number of Tests"
+                                type='number'
+                                value={testsNumber}
+                                onChange={handleTestsNumberChange}
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                disabled={testsNumber == '' || testsNumber == '0'}
+                                label="Questions in a test"
+                                type='number'
+                                value={(testsNumber == '' || testsNumber == '0') ? '' : questionsNumber}
+                                onChange={handleQuestionsNumberChange}
+                                size="small"
+                            />
+                        </Grid>
+                    </Grid>
+                }
+                {(currentStep == 3) &&
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="Additional task"
+                                value={additionalTask1Name}
+                                onChange={handleAdditionalTask1NameChange}
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="Number"
+                                type='number'
+                                value={additionalTask1Number}
+                                onChange={handleAdditionalTask1NumberChange}
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="Additional task"
+                                value={additionalTask2Name}
+                                onChange={handleAdditionalTask2NameChange}
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="Number"
+                                type='number'
+                                value={additionalTask2Number}
+                                onChange={handleAdditionalTask2NumberChange}
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="Additional task"
+                                value={additionalTask3Name}
+                                onChange={handleAdditionalTask3NameChange}
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="Number"
+                                type='number'
+                                value={additionalTask3Number}
+                                onChange={handleAdditionalTask3NumberChange}
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="Additional task"
+                                value={additionalTask4Name}
+                                onChange={handleAdditionalTask4NameChange}
+                                size="small"
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                fullWidth
+                                label="Number"
+                                type='number'
+                                value={additionalTask4Number}
+                                onChange={handleAdditionalTask4NumberChange}
+                                size="small"
+                            />
+                        </Grid>
+                    </Grid>
+                }
+            </Container>
             <Container style={{ padding: '2%' }}>
                 {(currentStep != 0) &&
                 <Button variant="contained" 
@@ -135,7 +347,7 @@ function NewStudySettings() {
                     fontWeight: 'bold',
                     fontSize: '60%',
                     fontFamily: 'cursive',
-                    marginRight: '1%' }}
+                    marginRight: '2%' }}
                     onClick={stepBack}>
                     Back
                 </Button>}
@@ -145,8 +357,7 @@ function NewStudySettings() {
                     color: theme.palette.black,
                     fontWeight: 'bold',
                     fontSize: '60%',
-                    fontFamily: 'cursive',
-                    marginLeft: '1%' }}
+                    fontFamily: 'cursive' }}
                     onClick={NextStep}>
                     {currentStep == 3 ? 'Let’s start! ': 'Next'}
                 </Button>
