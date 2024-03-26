@@ -46,6 +46,12 @@ function NewStudySettings() {
     const [additionalTask4Name, setAdditionalTask4Name] = useState('');
     const [additionalTask4Number, setAdditionalTask4Number] = useState('');
 
+    const [isQuestionsNumberDisabled, setIsQuestionsNumberDisabled] = useState(true);
+    const [isAdditionalTask1NumberDisabled, setIsAdditionalTask1NumberDisabled] = useState(true);
+    const [isAdditionalTask2NumberDisabled, setIsAdditionalTask2NumberDisabled] = useState(true);
+    const [isAdditionalTask3NumberDisabled, setIsAdditionalTask3NumberDisabled] = useState(true);
+    const [isAdditionalTask4NumberDisabled, setIsAdditionalTask4NumberDisabled] = useState(true);
+
     // Event handlers to update state when input values change
     const handleCourseNameChange = (event) => {
         setCourseName(event.target.value);
@@ -72,6 +78,7 @@ function NewStudySettings() {
     };
     const handleTestsNumberChange = (event) => {
         setTestsNumber(event.target.value);
+        setIsQuestionsNumberDisabled((event.target.value == '' || event.target.value == '0') ? true : false);
     };
     const handleQuestionsNumberChange = (event) => {
         setQuestionsNumber(event.target.value);
@@ -79,24 +86,28 @@ function NewStudySettings() {
     
     const handleAdditionalTask1NameChange = (event) => {
         setAdditionalTask1Name(event.target.value);
+        setIsAdditionalTask1NumberDisabled((event.target.value == '') ? true : false);
     };
     const handleAdditionalTask1NumberChange = (event) => {
         setAdditionalTask1Number(event.target.value);
     };
     const handleAdditionalTask2NameChange = (event) => {
         setAdditionalTask2Name(event.target.value);
+        setIsAdditionalTask2NumberDisabled((event.target.value == '') ? true : false);
     };
     const handleAdditionalTask2NumberChange = (event) => {
         setAdditionalTask2Number(event.target.value);
     };
     const handleAdditionalTask3NameChange = (event) => {
         setAdditionalTask3Name(event.target.value);
+        setIsAdditionalTask3NumberDisabled((event.target.value == '') ? true : false);
     };
     const handleAdditionalTask3NumberChange = (event) => {
         setAdditionalTask3Number(event.target.value);
     };
     const handleAdditionalTask4NameChange = (event) => {
         setAdditionalTask4Name(event.target.value);
+        setIsAdditionalTask4NumberDisabled((event.target.value == '') ? true : false);
     };
     const handleAdditionalTask4NumberChange = (event) => {
         setAdditionalTask4Number(event.target.value);
@@ -247,10 +258,10 @@ function NewStudySettings() {
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
-                                disabled={testsNumber == '' || testsNumber == '0'}
+                                disabled={isQuestionsNumberDisabled}
                                 label="Questions in a test"
                                 type='number'
-                                value={(testsNumber == '' || testsNumber == '0') ? '' : questionsNumber}
+                                value={isQuestionsNumberDisabled ? '' : questionsNumber}
                                 onChange={handleQuestionsNumberChange}
                                 size="small"
                             />
@@ -271,9 +282,10 @@ function NewStudySettings() {
                         <Grid item xs={6}>
                             <TextField
                                 fullWidth
+                                disabled={isAdditionalTask1NumberDisabled}
                                 label="Number"
                                 type='number'
-                                value={additionalTask1Number}
+                                value={isAdditionalTask1NumberDisabled ? '' : additionalTask1Number}
                                 onChange={handleAdditionalTask1NumberChange}
                                 size="small"
                             />
@@ -290,9 +302,10 @@ function NewStudySettings() {
                         <Grid item xs={6}>
                             <TextField
                                 fullWidth
+                                disabled={isAdditionalTask2NumberDisabled}
                                 label="Number"
                                 type='number'
-                                value={additionalTask2Number}
+                                value={isAdditionalTask2NumberDisabled ? '' : additionalTask2Number}
                                 onChange={handleAdditionalTask2NumberChange}
                                 size="small"
                             />
@@ -309,9 +322,10 @@ function NewStudySettings() {
                         <Grid item xs={6}>
                             <TextField
                                 fullWidth
+                                disabled={isAdditionalTask3NumberDisabled}
                                 label="Number"
                                 type='number'
-                                value={additionalTask3Number}
+                                value={isAdditionalTask3NumberDisabled ? '' : additionalTask3Number}
                                 onChange={handleAdditionalTask3NumberChange}
                                 size="small"
                             />
@@ -328,9 +342,10 @@ function NewStudySettings() {
                         <Grid item xs={6}>
                             <TextField
                                 fullWidth
+                                disabled={isAdditionalTask4NumberDisabled}
                                 label="Number"
                                 type='number'
-                                value={additionalTask4Number}
+                                value={isAdditionalTask4NumberDisabled ? '' : additionalTask4Number}
                                 onChange={handleAdditionalTask4NumberChange}
                                 size="small"
                             />
