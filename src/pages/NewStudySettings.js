@@ -115,7 +115,9 @@ function NewStudySettings() {
     
     const navigate = useNavigate();
     const navigateStudy = () => {
-        navigate('/Study');
+        navigate('/Study', {
+            state: { courseName, testDate }
+        });
     };
     const stepBack = () => {
         setCurrentStep(currentStep - 1);
@@ -126,9 +128,13 @@ function NewStudySettings() {
         if (currentStep + 1 == 4) {
             navigateStudy();
         } else {
-            setCurrentStep(currentStep + 1);
-            setSettingsTitle(steps[currentStep + 1]);
-            setSettingsInstruction(instructions[currentStep + 1]);
+            if (courseName == '' || testDate == '') {
+                alert('Please enter the required details'); 
+            } else {
+                setCurrentStep(currentStep + 1);
+                setSettingsTitle(steps[currentStep + 1]);
+                setSettingsInstruction(instructions[currentStep + 1]);
+            }
         }
     };
 

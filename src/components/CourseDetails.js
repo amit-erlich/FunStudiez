@@ -2,7 +2,7 @@ import React from 'react';
 
 const CourseDetails = ({
     courseName,
-    tastDate,
+    testDate,
 }) => {
 
     return (
@@ -12,7 +12,7 @@ const CourseDetails = ({
                     <span style={{ fontWeight: 'bold', fontSize: '200%' }}>{courseName}</span>
                 </p>
                 <p style={{ fontSize: '110%', marginTop: '-20px' }}>
-                <span style={{ fontWeight: 'bold' }}>Test Date:</span> {tastDate}
+                <span style={{ fontWeight: 'bold' }}>Test Date:</span> {testDate}
                 </p>
             </p>
         </>

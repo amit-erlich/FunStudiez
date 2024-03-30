@@ -8,9 +8,11 @@ import SquaresPanel from '../components/SquaresPanel';
 import ProgressAvatar from '../components/ProgressAvatar';
 import AppMainBar from '../components/AppMainBar';
 import Achievements from '../components/Achievements';
+import { useLocation } from 'react-router-dom';
 
 function Study() {
   const theme = useTheme();
+  const location = useLocation();
   const [timerTime, setTimerTime] = useState(0);
   const [timerButtonColor, setTimerButtonColor] = useState(theme.palette.black);
   const [showTimerPopup, setShowTimerPopup] = useState(false);
@@ -27,8 +29,7 @@ function Study() {
   const [is2ColorsColored, setIs2ColorsColored] = useState(false);
   const [isAllColorsColored, setIsAllColorsColored] = useState(false);
 
-  const courseName = 'Complexity';
-  const tastDate = '14/02/24';
+  const { courseName, testDate } = location.state;
   const studyData = {};
 
   //---------------------------------------------------------
@@ -195,7 +196,7 @@ function Study() {
           <HeartsBar text='30 min break' number='3' color={theme.palette.green} onClick={() => setTimerPopup(30, theme.palette.green)} />
         </div>
         <div style={{ position: 'absolute', top: 70, display: 'flex', alignItems: 'flex-start' }}>
-          <CourseDetails courseName={courseName} tastDate={tastDate}></CourseDetails>
+          <CourseDetails courseName={courseName} testDate={testDate}></CourseDetails>
         </div>
         <div style={{ position: 'absolute', top: 75, right: 20, display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
           <Achievements 
