@@ -33,15 +33,11 @@ const theme = createTheme({
             starGap: 3
         },
         task4: {
-            text: 'marathon',
-            color: 'green',
-            starGap: 2
-        },
-        task5: {
             text: 'up to page',
             color: 'lightBlue',
             starGap: 2,
-            pageGap: 5
+            pages: 0,
+            squaresNumber: 10
         },
     },
     solvingTask: {
@@ -64,7 +60,7 @@ const theme = createTheme({
     additionalTask: {
         task1: {
             text: '',
-            color: 'red',
+            color: 'green',
             starGap: 2
         },
         task2: {
@@ -73,6 +69,11 @@ const theme = createTheme({
             starGap: 2
         },
         task3: {
+            text: '',
+            color: 'red',
+            starGap: 2
+        },
+        task4: {
             text: '',
             color: 'gray',
             starGap: 2

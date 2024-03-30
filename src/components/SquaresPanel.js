@@ -44,7 +44,7 @@ const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
   }, [loading]);
 
   const fillTaskSquares = (array, taskType, taskNumber, squareNumber, questionNum, taskKey) => {
-    const isReadTask5 = (taskType === 'readingTask' && taskNumber === 'task5');
+    const isReadTask4 = (taskType === 'readingTask' && taskNumber === 'task4');
     const isSolveTask3 = (taskType === 'solvingTask' && taskNumber === 'task3');
   
     for (let i = 1; i <= squareNumber.length; i++) {
@@ -54,7 +54,7 @@ const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
           isColored={squareNumber[i - 1]} 
           taskType={taskType} 
           taskNumber={taskNumber} 
-          number={isSolveTask3 ? questionNum : (isReadTask5 ? theme.readingTask.task5.pageGap * i : i)} 
+          number={isSolveTask3 ? questionNum : (isReadTask4 ? Math.floor(theme.readingTask.task4.pages / 10) * i : i)}
           taskKey={taskKey} 
           squareIndex={i - 1} 
           onClick={onClickSquare} 

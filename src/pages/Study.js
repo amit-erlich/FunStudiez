@@ -28,7 +28,7 @@ function Study() {
   const [isAllColorsColored, setIsAllColorsColored] = useState(false);
 
   const courseName = 'Complexity';
-  const tastDate = '28/01/24';
+  const tastDate = '14/02/24';
   const studyData = {};
 
   //---------------------------------------------------------
@@ -40,27 +40,32 @@ function Study() {
     taskText: taskText,
   });
 
-  const initializeExampleSettingArray = (taskType, taskNumber, squareNumber, questionsNumber) => ({
+  const initializeExampleSettingsArray = (taskType, taskNumber, squareNumber, questionsNumber) => ({
     taskType: taskType,
     taskNumber: taskNumber,
     squareNumber: squareNumber,
     questionsNumber: questionsNumber,
   });
 
-  const createNewStudy = (settingArray, additionatText) => {
+  const createNewStudy = (settingsArray, additionatText) => {
     let textIndex = 0;
     let countSquares = 0;
 
-    for (let i = 0; i < settingArray.length; i++) {
-      const type = settingArray[i].taskType === 'R' ? 'readingTask' : (settingArray[i].taskType === 'S' ? 'solvingTask' : 'additionalTask');
-      const isReadTask5 = (type === 'readingTask' && settingArray[i].taskNumber === 5);
-      const squaresNumber = isReadTask5 ? Math.floor(settingArray[i].squareNumber / theme.readingTask.task5.pageGap) : settingArray[i].squareNumber;
-      const {starGap} = theme[type][`task${settingArray[i].taskNumber}`];
+    for (let i = 0; i < settingsArray.length; i++) {
+      const type = settingsArray[i].taskType === 'R' ? 'readingTask' : (settingsArray[i].taskType === 'S' ? 'solvingTask' : 'additionalTask');
+      const isReadTask4 = (type === 'readingTask' && settingsArray[i].taskNumber === 4);
+
+      if (isReadTask4) {
+        theme.readingTask.task4.pages = settingsArray[i].squareNumber;
+      }
+
+      const squaresNumber = isReadTask4 ? theme.readingTask.task4.squaresNumber : settingsArray[i].squareNumber;
+      const {starGap} = theme[type][`task${settingsArray[i].taskNumber}`];
       const starSquareNumber = Math.floor(squaresNumber / starGap);
       const text = type === 'additionalTask' ? additionatText[textIndex++]: '';
 
-      const taskKey = `${type}_task${settingArray[i].taskNumber}`;
-      const taskData = initializeTaskData(squaresNumber, starSquareNumber, settingArray[i].questionsNumber, text);
+      const taskKey = `${type}_task${settingsArray[i].taskNumber}`;
+      const taskData = initializeTaskData(squaresNumber, starSquareNumber, settingsArray[i].questionsNumber, text);
       studyData[taskKey] = taskData;
 
       countSquares += squaresNumber + starSquareNumber;
@@ -72,20 +77,21 @@ function Study() {
 
   useEffect(() => {
     const creatExampleStudy = () => {
-      const settingArray = [];
+      const settingsArray = [];
   
-      settingArray.push(initializeExampleSettingArray('R', 1, 8));
+      settingsArray.push(initializeExampleSettingsArray('R', 1, 8));
+      settingsArray.push(initializeExampleSettingsArray('R', 4, 100));
   
-      settingArray.push(initializeExampleSettingArray('S', 1, 9));
-      settingArray.push(initializeExampleSettingArray('S', 2, 4));
-      settingArray.push(initializeExampleSettingArray('S', 3, 4, 3));
+      settingsArray.push(initializeExampleSettingsArray('S', 1, 9));
+      settingsArray.push(initializeExampleSettingsArray('S', 2, 4));
+      settingsArray.push(initializeExampleSettingsArray('S', 3, 4, 3));
   
-      settingArray.push(initializeExampleSettingArray('O', 1, 6));
-      settingArray.push(initializeExampleSettingArray('O', 2, 1));
+      settingsArray.push(initializeExampleSettingsArray('O', 1, 6));
+      settingsArray.push(initializeExampleSettingsArray('O', 2, 1));
   
       const additionatText = ['Read 5 sentences', 'Read formula sheet'];
   
-      createNewStudy(settingArray, additionatText);
+      createNewStudy(settingsArray, additionatText);
     }
     creatExampleStudy();
   }, [theme]);
