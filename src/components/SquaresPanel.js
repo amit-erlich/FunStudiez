@@ -25,10 +25,6 @@ const SquaresPanel = ({ squaresData, onClickSquare, onClickStarSquare }) => {
         const [taskType, taskNumber] = taskKeyString.split('_');
         const { color, starGap } = theme[taskType][taskNumber];
 
-        if (taskType === 'additionalTask') {
-          theme[taskType][taskNumber]['text'] = taskData.taskText;
-        }
-
         fillTaskSquares(shuffledTaskSquares, taskType, taskNumber, taskData.squares, taskData.questionsNumber, taskKeyString);
         fillStarSquares(shuffledTaskSquares, taskData.starSquares, theme.palette[color], starGap, taskKeyString);
       }

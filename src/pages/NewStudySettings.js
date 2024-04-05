@@ -116,7 +116,30 @@ function NewStudySettings() {
     const navigate = useNavigate();
     const navigateStudy = () => {
         navigate('/Study', {
-            state: { courseName, testDate }
+            state: { 
+                isNewStudy: true,
+
+                courseName, 
+                testDate,
+
+                presentationsNumber, 
+                notebooksNumber,
+                assignmentsNumberR,
+                pagesNumber,
+
+                assignmentsNumberS,
+                testsNumber,
+                questionsNumber,
+
+                additionalTask1Name,
+                additionalTask1Number,
+                additionalTask2Name,
+                additionalTask2Number,
+                additionalTask3Name,
+                additionalTask3Number,
+                additionalTask4Name,
+                additionalTask4Number
+            }
         });
     };
     const stepBack = () => {

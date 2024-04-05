@@ -29,16 +29,37 @@ function Study() {
   const [is2ColorsColored, setIs2ColorsColored] = useState(false);
   const [isAllColorsColored, setIsAllColorsColored] = useState(false);
 
-  const { courseName, testDate } = location.state;
+  const {
+    isNewStudy,
+
+    courseName, 
+    testDate,
+
+    presentationsNumber, 
+    notebooksNumber,
+    assignmentsNumberR,
+    pagesNumber,
+
+    assignmentsNumberS,
+    testsNumber,
+    questionsNumber,
+
+    additionalTask1Name,
+    additionalTask1Number,
+    additionalTask2Name,
+    additionalTask2Number,
+    additionalTask3Name,
+    additionalTask3Number,
+    additionalTask4Name,
+    additionalTask4Number } = location.state;
   const studyData = {};
 
   //---------------------------------------------------------
 
-  const initializeTaskData = (numSquares, numStarSquares, questionsNumber, taskText) => ({
+  const initializeTaskData = (numSquares, numStarSquares, questionsNumber) => ({
     squares: Array(numSquares).fill(false),
     starSquares: Array(numStarSquares).fill(false),
     questionsNumber: questionsNumber,
-    taskText: taskText,
   });
 
   const initializeExampleSettingsArray = (taskType, taskNumber, squareNumber, questionsNumber) => ({
@@ -48,7 +69,7 @@ function Study() {
     questionsNumber: questionsNumber,
   });
 
-  const createNewStudy = (settingsArray, additionatText) => {
+  const createNewStudy = (settingsArray, additionalText) => {
     let textIndex = 0;
     let countSquares = 0;
 
@@ -63,10 +84,13 @@ function Study() {
       const squaresNumber = isReadTask4 ? theme.readingTask.task4.squaresNumber : settingsArray[i].squareNumber;
       const {starGap} = theme[type][`task${settingsArray[i].taskNumber}`];
       const starSquareNumber = Math.floor(squaresNumber / starGap);
-      const text = type === 'additionalTask' ? additionatText[textIndex++]: '';
+
+      if (type === 'additionalTask') {
+        theme[type][`task${settingsArray[i].taskNumber}`]['text'] = additionalText[textIndex++];
+      }
 
       const taskKey = `${type}_task${settingsArray[i].taskNumber}`;
-      const taskData = initializeTaskData(squaresNumber, starSquareNumber, settingsArray[i].questionsNumber, text);
+      const taskData = initializeTaskData(squaresNumber, starSquareNumber, settingsArray[i].questionsNumber);
       studyData[taskKey] = taskData;
 
       countSquares += squaresNumber + starSquareNumber;
@@ -80,21 +104,44 @@ function Study() {
     const creatExampleStudy = () => {
       const settingsArray = [];
   
-      settingsArray.push(initializeExampleSettingsArray('R', 1, 8));
-      settingsArray.push(initializeExampleSettingsArray('R', 4, 100));
+      settingsArray.push(initializeExampleSettingsArray('R', 1, 4));
+      //settingsArray.push(initializeExampleSettingsArray('R', 4, 100));
   
-      settingsArray.push(initializeExampleSettingsArray('S', 1, 9));
-      settingsArray.push(initializeExampleSettingsArray('S', 2, 4));
-      settingsArray.push(initializeExampleSettingsArray('S', 3, 4, 3));
+      //settingsArray.push(initializeExampleSettingsArray('S', 1, 9));
+      //settingsArray.push(initializeExampleSettingsArray('S', 2, 4));
+      //settingsArray.push(initializeExampleSettingsArray('S', 3, 4, 3));
   
       settingsArray.push(initializeExampleSettingsArray('O', 1, 6));
       settingsArray.push(initializeExampleSettingsArray('O', 2, 1));
   
-      const additionatText = ['Read 5 sentences', 'Read formula sheet'];
+      const additionalText = ['Read 5 sentences', 'Read formula sheet'];
   
-      createNewStudy(settingsArray, additionatText);
+      createNewStudy(settingsArray, additionalText);
     }
     creatExampleStudy();
+
+    // const creatStudy = () => {
+    //   const settingsArray = [];
+
+    //   if (presentationsNumber != '' && presentationsNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('R', 1, presentationsNumber)) };
+    //   if (notebooksNumber != '' && notebooksNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('R', 2, notebooksNumber)) };
+    //   if (assignmentsNumberR != '' && assignmentsNumberR > 0 ) { settingsArray.push(initializeExampleSettingsArray('R', 3, assignmentsNumberR)) };
+    //   if (pagesNumber != '' && pagesNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('R', 4, pagesNumber)) };
+  
+    //   if (assignmentsNumberS != '' && assignmentsNumberS > 0 ) { settingsArray.push(initializeExampleSettingsArray('S', 1, assignmentsNumberS)) };
+    //   if (testsNumber != '' && testsNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('S', 2, testsNumber)) };
+    //   if (questionsNumber != '' && questionsNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('S', 3, testsNumber * 3, Math.floor(questionsNumber / 3))) };
+  
+    //   if (additionalTask1Number != '' && additionalTask1Number > 0 ) { settingsArray.push(initializeExampleSettingsArray('O', 1, additionalTask1Number)) };
+    //   if (additionalTask2Number != '' && additionalTask2Number > 0 ) { settingsArray.push(initializeExampleSettingsArray('O', 2, additionalTask2Number)) };
+    //   if (additionalTask3Number != '' && additionalTask3Number > 0 ) { settingsArray.push(initializeExampleSettingsArray('O', 3, additionalTask3Number)) };
+    //   if (additionalTask4Number != '' && additionalTask4Number > 0 ) { settingsArray.push(initializeExampleSettingsArray('O', 4, additionalTask4Number)) };
+  
+    //   const additionalText = [additionalTask1Name, additionalTask2Name, additionalTask3Name, additionalTask4Name];
+  
+    //   createNewStudy(settingsArray, additionalText);
+    // }
+    // creatStudy();
   }, [theme]);
 
   //---------------------------------------------------------
