@@ -74,14 +74,14 @@ function Study() {
     let countSquares = 0;
 
     for (let i = 0; i < settingsArray.length; i++) {
-      const type = settingsArray[i].taskType === 'R' ? 'readingTask' : (settingsArray[i].taskType === 'S' ? 'solvingTask' : 'additionalTask');
-      const isReadTask4 = (type === 'readingTask' && settingsArray[i].taskNumber === 4);
+      const type = settingsArray[i].taskType;
 
+      const isReadTask4 = (type === 'readingTask' && settingsArray[i].taskNumber === 4);
       if (isReadTask4) {
         theme.readingTask.task4.pages = settingsArray[i].squareNumber;
       }
 
-      const squaresNumber = isReadTask4 ? theme.readingTask.task4.squaresNumber : settingsArray[i].squareNumber;
+      const squaresNumber = (isReadTask4 ? theme.readingTask.task4.squaresNumber : Math.floor(settingsArray[i].squareNumber));
       const {starGap} = theme[type][`task${settingsArray[i].taskNumber}`];
       const starSquareNumber = Math.floor(squaresNumber / starGap);
 
@@ -101,47 +101,47 @@ function Study() {
   }
 
   useEffect(() => {
-    const creatExampleStudy = () => {
-      const settingsArray = [];
-  
-      settingsArray.push(initializeExampleSettingsArray('R', 1, 4));
-      //settingsArray.push(initializeExampleSettingsArray('R', 4, 100));
-  
-      //settingsArray.push(initializeExampleSettingsArray('S', 1, 9));
-      //settingsArray.push(initializeExampleSettingsArray('S', 2, 4));
-      //settingsArray.push(initializeExampleSettingsArray('S', 3, 4, 3));
-  
-      settingsArray.push(initializeExampleSettingsArray('O', 1, 6));
-      settingsArray.push(initializeExampleSettingsArray('O', 2, 1));
-  
-      const additionalText = ['Read 5 sentences', 'Read formula sheet'];
-  
-      createNewStudy(settingsArray, additionalText);
-    }
-    creatExampleStudy();
-
-    // const creatStudy = () => {
+    // const creatExampleStudy = () => {
     //   const settingsArray = [];
-
-    //   if (presentationsNumber != '' && presentationsNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('R', 1, presentationsNumber)) };
-    //   if (notebooksNumber != '' && notebooksNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('R', 2, notebooksNumber)) };
-    //   if (assignmentsNumberR != '' && assignmentsNumberR > 0 ) { settingsArray.push(initializeExampleSettingsArray('R', 3, assignmentsNumberR)) };
-    //   if (pagesNumber != '' && pagesNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('R', 4, pagesNumber)) };
   
-    //   if (assignmentsNumberS != '' && assignmentsNumberS > 0 ) { settingsArray.push(initializeExampleSettingsArray('S', 1, assignmentsNumberS)) };
-    //   if (testsNumber != '' && testsNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('S', 2, testsNumber)) };
-    //   if (questionsNumber != '' && questionsNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('S', 3, testsNumber * 3, Math.floor(questionsNumber / 3))) };
+    //   settingsArray.push(initializeExampleSettingsArray('R', 1, 4));
+    //   //settingsArray.push(initializeExampleSettingsArray('R', 4, 100));
   
-    //   if (additionalTask1Number != '' && additionalTask1Number > 0 ) { settingsArray.push(initializeExampleSettingsArray('O', 1, additionalTask1Number)) };
-    //   if (additionalTask2Number != '' && additionalTask2Number > 0 ) { settingsArray.push(initializeExampleSettingsArray('O', 2, additionalTask2Number)) };
-    //   if (additionalTask3Number != '' && additionalTask3Number > 0 ) { settingsArray.push(initializeExampleSettingsArray('O', 3, additionalTask3Number)) };
-    //   if (additionalTask4Number != '' && additionalTask4Number > 0 ) { settingsArray.push(initializeExampleSettingsArray('O', 4, additionalTask4Number)) };
+    //   //settingsArray.push(initializeExampleSettingsArray('S', 1, 9));
+    //   //settingsArray.push(initializeExampleSettingsArray('S', 2, 4));
+    //   //settingsArray.push(initializeExampleSettingsArray('S', 3, 4, 3));
   
-    //   const additionalText = [additionalTask1Name, additionalTask2Name, additionalTask3Name, additionalTask4Name];
+    //   settingsArray.push(initializeExampleSettingsArray('O', 1, 6));
+    //   settingsArray.push(initializeExampleSettingsArray('O', 2, 1));
+  
+    //   const additionalText = ['Read 5 sentences', 'Read formula sheet'];
   
     //   createNewStudy(settingsArray, additionalText);
     // }
-    // creatStudy();
+    // creatExampleStudy();
+
+    const creatStudy = () => {
+      const settingsArray = [];
+
+      if (presentationsNumber != '' && presentationsNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('readingTask', 1, presentationsNumber)) };
+      if (notebooksNumber != '' && notebooksNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('readingTask', 2, notebooksNumber)) };
+      if (assignmentsNumberR != '' && assignmentsNumberR > 0 ) { settingsArray.push(initializeExampleSettingsArray('readingTask', 3, assignmentsNumberR)) };
+      if (pagesNumber != '' && pagesNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('readingTask', 4, pagesNumber)) };
+  
+      if (assignmentsNumberS != '' && assignmentsNumberS > 0 ) { settingsArray.push(initializeExampleSettingsArray('solvingTask', 1, assignmentsNumberS)) };
+      if (testsNumber != '' && testsNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('solvingTask', 2, testsNumber)) };
+      if (questionsNumber != '' && questionsNumber > 0 ) { settingsArray.push(initializeExampleSettingsArray('solvingTask', 3, testsNumber * 3, Math.floor(questionsNumber / 3))) };
+  
+      if (additionalTask1Number != '' && additionalTask1Number > 0 ) { settingsArray.push(initializeExampleSettingsArray('additionalTask', 1, additionalTask1Number)) };
+      if (additionalTask2Number != '' && additionalTask2Number > 0 ) { settingsArray.push(initializeExampleSettingsArray('additionalTask', 2, additionalTask2Number)) };
+      if (additionalTask3Number != '' && additionalTask3Number > 0 ) { settingsArray.push(initializeExampleSettingsArray('additionalTask', 3, additionalTask3Number)) };
+      if (additionalTask4Number != '' && additionalTask4Number > 0 ) { settingsArray.push(initializeExampleSettingsArray('additionalTask', 4, additionalTask4Number)) };
+  
+      const additionalText = [additionalTask1Name, additionalTask2Name, additionalTask3Name, additionalTask4Name];
+  
+      createNewStudy(settingsArray, additionalText);
+    }
+    creatStudy();
   }, [theme]);
 
   //---------------------------------------------------------
